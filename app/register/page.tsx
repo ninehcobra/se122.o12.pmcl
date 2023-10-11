@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link';
-import './login.css'
+import './register.css'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Image from 'next/image'
@@ -13,15 +13,21 @@ export default function Login() {
 
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
+    const [rePassword, setRePassword] = useState('')
     const [isValid, setIsValid] = useState(true)
+    const [isSame, setIsSame] = useState(true)
 
     const onChangeInput = (value: any, type: any): void => {
         setIsValid(true)
+        setIsSame(true)
         if (type === 'username') {
             setUserName(value)
         }
         else if (type === 'password') {
             setPassword(value)
+        }
+        else if (type === 'repassword') {
+            setRePassword(value)
         }
     }
 
@@ -30,6 +36,9 @@ export default function Login() {
         let passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/
         if (userName === '' || password === '' || usernameRegex.test(userName) === false || passwordRegex.test(password) === false) {
             setIsValid(false)
+        }
+        else if (password !== rePassword) {
+            setIsSame(false)
         }
         else {
             router.push('/dashboard')
@@ -42,7 +51,7 @@ export default function Login() {
 
     return (
         <div className="login-container">
-            <div className='login-form '>
+            <div className='register-form '>
                 <div className='container '>
                     <div className='row' >
                         <div className='col-lg-8 ' style={{ padding: '0 20px' }}>
@@ -74,10 +83,21 @@ export default function Login() {
                                     value={password}
                                     onChange={(e) => onChangeInput(e.target.value, 'password')}
                                 />
-                                <Link href={'/'} className='nav-text'>Quên mật khẩu?</Link>
-                                <Button onClick={() => onLogin()} className='login-btn'>Đăng nhập</Button>
-                                <div style={{ color: "#9ea3aa", fontSize: '14px' }}>Cần một tài khoản?
-                                    <Link className="nav-text" href={"/register"}> Đăng ký</Link>
+                                <Form.Label className={isSame ? 'login-label' : 'login-label error-text'} htmlFor="inputPassword5">NHẬP LẠI MẬT KHẨU
+                                    {isSame ? <span style={{ marginLeft: '4px', color: 'red' }}>*</span> : <span style={{ marginLeft: '4px', color: '#ed7277', fontStyle: 'italic' }}>Mật khẩu không trùng khớp.</span>}
+                                </Form.Label>
+                                <Form.Control
+                                    className='login-input'
+                                    type="password"
+                                    id="inputPassword5"
+                                    aria-describedby="passwordHelpBlock"
+                                    value={rePassword}
+                                    onChange={(e) => onChangeInput(e.target.value, 'repassword')}
+                                />
+
+                                <Button onClick={() => onLogin()} className='login-btn'>Đăng ký</Button>
+                                <div style={{ color: "#9ea3aa", fontSize: '14px' }}>Đã có tài khoản
+                                    <Link className="nav-text" href={"/login"}> Đăng nhập</Link>
                                 </div>
                             </div>
 
