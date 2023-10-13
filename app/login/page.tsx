@@ -26,7 +26,7 @@ export default function Login() {
     }
 
     const inputValidation = () => {
-        let usernameRegex = /^[a-zA-Z0-9_]{3,20}$/;
+        let usernameRegex = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
         let passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/
         if (userName === '' || password === '' || usernameRegex.test(userName) === false || passwordRegex.test(password) === false) {
             setIsValid(false)
