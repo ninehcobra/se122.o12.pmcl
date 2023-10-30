@@ -1,7 +1,7 @@
 'use client'
 import "./sliderbanner.scss"
 import Slider from "react-slick";
-import pic1 from "../../public/sliders/1.jpg"
+
 import { useState } from 'react'
 
 

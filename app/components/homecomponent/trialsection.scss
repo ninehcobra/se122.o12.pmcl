@@ -1,0 +1,92 @@
+.trial-sec {
+    display: block;
+    position: relative;
+    padding: 70px 0;
+    width: 100%;
+
+    .coupon {
+        .coupon-title {
+            font-size: 42px;
+            text-transform: uppercase;
+            color: #0c2e60;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+
+            span {
+                display: inline-block;
+                font-size: 16px;
+            }
+        }
+
+        p {
+            color: #000;
+            margin-bottom: 40px;
+
+            strong {
+                text-transform: uppercase;
+                color: #0c2e60;
+                font-weight: bolder;
+            }
+        }
+    }
+
+    .trial-form {
+        background-color: #fff;
+        border-radius: 3px;
+        max-width: 400px;
+        overflow: hidden;
+        position: relative;
+        padding: 40px 25px;
+        width: 100%;
+        z-index: 1;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ffb800;
+            -webkit-clip-path: circle(100% at 50% -170px);
+            clip-path: circle(100% at 50% -170px);
+            height: 130px;
+            width: 100%;
+            z-index: 0;
+        }
+
+        .form-title {
+            text-align: center;
+            text-transform: capitalize;
+            margin-bottom: 32px;
+            color: #fff;
+            padding: 0 0 30px;
+            position: relative;
+            z-index: 1;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        input {
+            border: 1px solid #e0e4e6;
+            padding: 10px 15px;
+            margin-bottom: 30px;
+            width: 100%;
+            overflow: visible;
+        }
+
+        button {
+            width: 100%;
+            background: linear-gradient(to right, #ef3e0f, #ffb800);
+            border: none;
+            color: #fff;
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 0.8;
+            text-transform: uppercase;
+            padding: 20px 40px;
+        }
+    }
+}

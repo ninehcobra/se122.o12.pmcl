@@ -1,0 +1,203 @@
+.courses {
+    display: block;
+    position: relative;
+    padding: 70px 0;
+    width: 100%;
+
+    .owl-item {
+        width: 380px !important;
+
+        .single-course {
+            position: relative;
+            -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.07);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.07);
+            margin-bottom: 40px;
+
+
+
+            .course-thumb {
+                position: relative;
+
+                img {
+                    display: block;
+                    width: 100%;
+
+
+                }
+
+                .ribbon {
+                    background-color: #ffc107;
+                    -webkit-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.07);
+                    box-shadow: 0 1px 0px rgba(0, 0, 0, 0.07);
+                    border-radius: 0;
+                    color: #000;
+                    display: block;
+                    font-size: 20px;
+                    position: absolute;
+                    padding: 7px 15px;
+                    top: 20px;
+                    left: -15px;
+
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        top: auto;
+                        left: 4px;
+                        right: auto;
+                        bottom: -7px;
+                        background: #bb7a03;
+                        -webkit-transform: rotate(35deg);
+                        transform: rotate(35deg);
+                        height: 20px;
+                        width: 20px;
+                        z-index: -1;
+                    }
+                }
+            }
+
+
+            .course-content {
+                border: 1px solid #e0e4e6;
+                border-radius: 3px;
+                padding: 25px;
+                position: relative;
+                margin-bottom: 20px;
+
+                h3 {
+                    font-size: 36px;
+                    line-height: 30px;
+                    color: #0c2e60;
+                    font-family: 'Poppins', sans-serif;
+                    font-weight: 600;
+
+                    a {
+                        font-size: 20px;
+                        display: block;
+                        color: #000;
+                    }
+                }
+
+                p {
+                    color: #0c2e60;
+                    font-family: "Roboto", sans-serif;
+                    font-size: 16px;
+                    font-weight: 400;
+                    line-height: 26px;
+                    margin-bottom: 20px;
+                }
+
+                .enroll {
+                    -webkit-box-align: center;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    display: -webkit-box;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -ms-flex-wrap: wrap;
+                    flex-wrap: wrap;
+                    -webkit-box-pack: justify;
+                    -ms-flex-pack: justify;
+                    justify-content: space-between;
+
+                    .ratings {
+                        -webkit-box-flex: 1;
+                        -ms-flex: 1;
+                        flex: 1;
+
+                        .total-students {
+                            display: block;
+                            margin: 0;
+                        }
+
+                        a {
+                            display: inline-block;
+                            color: #f98f05;
+                            transition: all 300ms ease-in-out;
+                            text-decoration: none;
+                            background-color: transparent;
+                        }
+
+                        .enrolled {
+                            display: inline-block;
+                            font-size: 13px;
+                            margin-left: 0;
+                        }
+                    }
+
+                    .course-meta {
+                        position: relative;
+                        -webkit-box-flex: 1;
+                        -ms-flex: 1;
+                        flex: 1;
+
+                        .btn-filled {
+                            border-radius: 0;
+                            background: -webkit-gradient(linear, left top, right top, from(#ef3e0f), to(#ffb800));
+                            background: linear-gradient(to right, #ef3e0f, #ffb800);
+                            border: none;
+                            color: #fff;
+                            display: inline-block;
+                            font-size: 13px;
+                            font-weight: 500;
+                            line-height: 0.8;
+                            text-transform: uppercase;
+                            padding: 15px;
+                            text-align: center;
+                            vertical-align: middle;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .sec-heading {
+        margin-bottom: 80px;
+
+        .sec-title {
+            font-size: 42px;
+            margin-bottom: 0;
+            color: #0c2e60;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+    }
+
+    .prev {
+        background-color: #cacaca !important;
+        border-radius: 50%;
+        color: #fff !important;
+        -webkit-transition: all 300ms ease-in-out;
+        transition: all 300ms ease-in-out;
+        height: 40px;
+        width: 40px;
+        position: absolute;
+        left: -60px;
+        background: 0 0;
+        color: inherit;
+        border: none;
+        padding: 0 !important;
+        font: inherit;
+        top: 215px;
+    }
+
+    .next {
+        background-color: #cacaca !important;
+        border-radius: 50%;
+        color: #fff !important;
+        -webkit-transition: all 300ms ease-in-out;
+        transition: all 300ms ease-in-out;
+        height: 40px;
+        width: 40px;
+        position: absolute;
+        right: -60px;
+
+        background: 0 0;
+        color: inherit;
+        border: none;
+        padding: 0 !important;
+        font: inherit;
+        top: 215px;
+    }
+
+}
