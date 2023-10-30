@@ -1,0 +1,30 @@
+.feature-box {
+    background-color: #0c2e60;
+    padding: 40px 0;
+
+    .f-box {
+        color: #fff;
+        padding-left: 70px;
+        position: relative;
+
+        i {
+            font-size: 52px;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+
+        strong {
+            font-family: "Poppins", sans-serif;
+            font-size: 22px;
+            font-weight: 500;
+            display: block;
+        }
+
+        span {
+            display: block;
+        }
+    }
+}
