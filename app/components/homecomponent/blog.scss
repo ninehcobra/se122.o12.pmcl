@@ -1,0 +1,105 @@
+.blog {
+    padding: 70px 0;
+    padding-bottom: 40px;
+
+    .row {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+
+        .sec-heading {
+            margin-bottom: 80px;
+
+            .tagline {
+                color: #ef470d;
+                display: block;
+                font-size: 14px;
+                font-weight: 500;
+                letter-spacing: 2.8px;
+                text-transform: uppercase;
+                margin-bottom: 10px;
+                position: relative;
+            }
+
+            .sec-title {
+                font-size: 42px;
+                margin-bottom: 0;
+                color: #0c2e60;
+                font-family: 'Poppins', sans-serif;
+                font-weight: 600;
+            }
+        }
+
+        .post-item {
+            position: relative;
+
+            img {
+                display: block;
+                width: 100%;
+                height: auto;
+                vertical-align: middle;
+                border-style: none;
+            }
+
+            .post-content {
+                background-color: #fff;
+                -webkit-box-shadow: 0 12px 20px rgba(1, 84, 85, 0.1);
+                box-shadow: 0 12px 20px rgba(1, 84, 85, 0.1);
+                border-radius: 10px;
+                padding: 30px;
+                position: relative;
+                margin-left: auto;
+                margin-top: -95px;
+                width: calc(100% - 20px);
+                z-index: 1;
+
+                .meta-tags {
+                    color: #83868c;
+
+                    a {
+                        display: inline-block !important;
+                        color: #83868c;
+                        font-size: 12px;
+                        text-transform: uppercase;
+                        position: relative;
+                        transition: all 300ms ease-in-out;
+                        text-decoration: none;
+                        background-color: transparent;
+
+                        i {
+                            margin-right: 15px;
+                            color: #83868c;
+                        }
+                    }
+
+                    .commentCount {
+                        margin-left: 15px;
+                    }
+                }
+
+                .post-title {
+                    color: #0c2e60;
+                    font-family: 'Poppins', sans-serif;
+                    font-weight: 600;
+                    font-size: 1.75rem;
+                    margin-bottom: 0.5rem;
+                    line-height: 1.2;
+
+                    a {
+                        display: block;
+                        font-size: 22px;
+                        color: #0c2e60;
+                        margin-bottom: 25px;
+                        transition: all 300ms ease-in-out;
+                        text-decoration: none;
+                        background-color: transparent;
+                    }
+                }
+            }
+        }
+    }
+
+}

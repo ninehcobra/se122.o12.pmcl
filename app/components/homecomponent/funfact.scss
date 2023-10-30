@@ -1,0 +1,55 @@
+.funfacts-02 {
+    border-bottom: 0;
+    padding: 70px 0;
+    display: block;
+    position: relative;
+    width: 100%;
+
+    ul {
+        -webkit-box-align: inherit;
+        -ms-flex-align: inherit;
+        align-items: inherit;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        li {
+            padding: 0;
+            -webkit-box-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+            text-align: center;
+            padding: 60px 0;
+            position: relative;
+            width: 100%;
+
+            &:not(:last-child) {
+                border-right: 1px solid #e0e4e6;
+            }
+
+            span {
+                font-size: 48px;
+                font-weight: 500;
+                line-height: 46px;
+                color: #0c2e60;
+            }
+
+            p {
+                margin-bottom: 0;
+                color: #000;
+                font-size: 14px;
+                text-transform: uppercase;
+                letter-spacing: 1.8px;
+                margin-top: 0;
+            }
+        }
+    }
+}

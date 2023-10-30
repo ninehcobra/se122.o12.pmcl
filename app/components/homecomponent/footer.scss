@@ -1,0 +1,48 @@
+.foo-top {
+    background-color: #f3f3f3;
+    padding: 80px 0;
+
+    .widget {
+        .widget-title {
+            margin-bottom: 25px;
+            font-size: 22px;
+            font-weight: 600;
+            color: #0c2e60;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+
+            li {
+                a {
+                    color: #999;
+                    display: block;
+                    font-weight: 300;
+                    margin-bottom: 5px;
+                    text-decoration: none;
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+}
+
+.foo-btm {
+    .copyright {
+        color: #83868c;
+        font-size: 13px;
+        text-align: center;
+        text-transform: uppercase;
+        margin-bottom: 0;
+        padding: 20px 0;
+
+        a {
+            color: #ef470d;
+            text-decoration: none;
+            background-color: transparent;
+        }
+    }
+}
