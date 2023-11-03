@@ -6,19 +6,19 @@ const FunFact = () => {
                 <ul>
                     <li>
                         <span>291</span>
-                        <p>Amazing Courses</p>
+                        <p>Các khóa học thú vị</p>
                     </li>
                     <li>
                         <span>38</span>
-                        <p>talented instructors</p>
+                        <p>Giảng viên tài năng</p>
                     </li>
                     <li>
                         <span>3940</span>
-                        <p>Skilled Students</p>
+                        <p>Học viên được đào tạo bài bản</p>
                     </li>
                     <li>
                         <span>14</span>
-                        <p>categories</p>
+                        <p>Chủ đề</p>
                     </li>
                 </ul>
             </div>

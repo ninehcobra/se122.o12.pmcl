@@ -1,24 +1,39 @@
 'use client'
-import Link from 'next/link';
-import './login.css'
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Image from 'next/image'
-import { useState } from 'react';
+import './login.scss'
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation'
+import axios from 'axios';
+import Header from '../components/homecomponent/header';
+import Footer from '../components/homecomponent/footer';
+import Link from 'next/link';
+import { login } from "../../services/userService"
+
 
 export default function Login() {
 
     const router = useRouter()
 
-    const [userName, setUserName] = useState('')
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [isChecked, setIsChecked] = useState(false)
+
     const [isValid, setIsValid] = useState(true)
+
+    useEffect(() => {
+        const savedEmail = localStorage.getItem('email');
+        const savedPassword = localStorage.getItem('password');
+        if (savedEmail && savedPassword) {
+            // Nếu có thông tin trong localStorage, điền vào các trường đăng nhập
+            setEmail(savedEmail);
+            setPassword(savedPassword);
+        }
+    }, []);
+
 
     const onChangeInput = (value: any, type: any): void => {
         setIsValid(true)
-        if (type === 'username') {
-            setUserName(value)
+        if (type === 'email') {
+            setEmail(value)
         }
         else if (type === 'password') {
             setPassword(value)
@@ -26,74 +41,84 @@ export default function Login() {
     }
 
     const inputValidation = () => {
-        let usernameRegex = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
+        let emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
         let passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/
-        if (userName === '' || password === '' || usernameRegex.test(userName) === false || passwordRegex.test(password) === false) {
+        if (email === '' || password === '' || emailRegex.test(email) === false || passwordRegex.test(password) === false) {
             setIsValid(false)
+            return false
         }
-        else {
-            router.push('/dashboard')
-        }
+        setIsValid(true)
+        return true
     }
 
     const onLogin = () => {
-        inputValidation()
+
+        if (inputValidation()) {
+            console.log(2)
+            let data = login(email, password)
+            saveLoginInfo()
+        }
+
     }
 
+    const saveLoginInfo = () => {
+        if (isChecked) {
+            console.log(2)
+            // Nếu người dùng chọn "Lưu nhớ mật khẩu", lưu thông tin vào localStorage
+            localStorage.setItem('email', email);
+            localStorage.setItem('password', password);
+        } else {
+            // Nếu không chọn, xóa thông tin khỏi localStorage
+            localStorage.removeItem('email');
+            localStorage.removeItem('password');
+        }
+    }
+
+
+
     return (
-        <div className="login-container">
-            <div className='login-form '>
-                <div className='container '>
-                    <div className='row' >
-                        <div className='col-lg-8 ' style={{ padding: '0 20px' }}>
-                            <div className='container'>
-                                <div className='login-header'>
-                                    <div style={{ color: "rgba(235,236,238,255)", fontSize: "20px", fontWeight: 'bold', marginBottom: '5px' }}>Chào mừng trở lại!</div>
-                                    <div style={{ color: "#9ea3aa", marginBottom: '15px' }}>Rất vui mừng khi được gặp lại bạn!</div>
-                                </div>
-                                <Form.Label className={isValid ? 'login-label' : 'login-label error-text'} htmlFor="inputPassword5">EMAIL HOẶC SỐ ĐIỆN THOẠI
+        <div>
+            <Header></Header>
 
-                                    {isValid ? <span style={{ marginLeft: '4px', color: 'red' }}>*</span> : <span style={{ marginLeft: '4px', color: '#ed7277', fontStyle: 'italic' }}>Tên đăng nhập hoặc mật khẩu không hợp lệ.</span>}
-                                </Form.Label>
-                                <Form.Control
-                                    className='login-input'
-                                    type="email"
-                                    id="inputPassword5"
-                                    aria-describedby="passwordHelpBlock"
-                                    value={userName}
-                                    onChange={(e) => onChangeInput(e.target.value, 'username')}
-                                />
-                                <Form.Label className={isValid ? 'login-label' : 'login-label error-text'} htmlFor="inputPassword5">MẬT KHẨU
-                                    {isValid ? <span style={{ marginLeft: '4px', color: 'red' }}>*</span> : <span style={{ marginLeft: '4px', color: '#ed7277', fontStyle: 'italic' }}>Tên đăng nhập hoặc mật khẩu không hợp lệ.</span>}
-                                </Form.Label>
-                                <Form.Control
-                                    className='login-input'
-                                    type="password"
-                                    id="inputPassword5"
-                                    aria-describedby="passwordHelpBlock"
-                                    value={password}
-                                    onChange={(e) => onChangeInput(e.target.value, 'password')}
-                                />
-                                <Link href={'/'} className='nav-text'>Quên mật khẩu?</Link>
-                                <Button onClick={() => onLogin()} className='login-btn'>Đăng nhập</Button>
-                                <div style={{ color: "#9ea3aa", fontSize: '14px' }}>Cần một tài khoản?
-                                    <Link className="nav-text" href={"/register"}> Đăng ký</Link>
-                                </div>
+            <section className="banner login-registration">
+                <div className="vector-img">
+                    <img src="https://raw.githubusercontent.com/ninehcobra/free-host-image/main/DoAn2/login.png" alt="" />
+                </div>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-6">
+                            <div className="content-box">
+                                <h2>Đăng nhập</h2>
+                                <p>Chào mừng bạn đến với ứng dụng dạy học của chúng tôi! <br />Hãy nhập thông tin đăng nhập của bạn để bắt đầu hành trình học tập mới của bạn. </p>
                             </div>
-
-                        </div>
-                        <div className='col-lg-4 d-none d-lg-block' >
-                            <div className='logo-container'>
-                                <Image src={'https://raw.githubusercontent.com/ninehcobra/free-host-image/main/News/logo.png'} width={200} height={200} alt={'logo app'}></Image>
-                                <div style={{ fontSize: '22px', fontWeight: 'bold' }}>Nineh</div>
-                                <div style={{ fontSize: '14px', textAlign: 'center' }}>Giải pháp <span style={{ fontWeight: 'bold' }}>{`học nhóm trực tuyến `}</span>
-                                    có mặt trên cả nền tảng <span style={{ fontWeight: 'bold' }} > Web</span> và <span style={{ fontWeight: 'bold' }} > Mobile</span></div>
+                            <div className="sl-form">
+                                <div className="form-group">
+                                    <label>Email
+                                        {!isValid ? <span style={{ color: 'red' }}> - Email hoặc mật khẩu không chính xác</span> : ''}
+                                    </label>
+                                    <input value={email} onChange={(e) => onChangeInput(e.target.value, 'email')} type="email" placeholder="example@gmail.com" required />
+                                </div>
+                                <div className="form-group">
+                                    <label>Mật khẩu
+                                        {!isValid ? <span style={{ color: 'red' }}> - Email hoặc mật khẩu không chính xác</span> : ''}
+                                    </label>
+                                    <input value={password} onChange={(e) => onChangeInput(e.target.value, 'password')} type="password" placeholder="Password" required />
+                                </div>
+                                <div className="form-check">
+                                    <input checked={isChecked} onChange={() => setIsChecked(!isChecked)} type="checkbox" className="form-check-input" />
+                                    <label className="form-check-label">Ghi nhớ mật khẩu</label>
+                                </div>
+                                <button onClick={onLogin} className="btn btn-filled btn-round"><span className="bh"></span> <span>Login</span></button>
+                                <p className="notice">Chưa có tài khoản <Link href="/register">Đăng ký Ngay</Link></p>
                             </div>
                         </div>
                     </div>
-
                 </div>
-            </div>
+            </section>
+
+
+            <Footer></Footer>
         </div>
+
     )
 }

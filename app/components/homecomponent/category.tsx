@@ -8,8 +8,9 @@ const Category = () => {
                 <div className="row">
                     <div className="col-lg-7 col-md-9 m-auto text-center">
                         <div className="sec-heading">
-                            <span className="tagline">Top categories</span>
-                            <h3 className="sec-title">Pick the right category Build your career</h3>
+                            <span className="tagline">Danh mục hàng đầu</span>
+
+                            <h3 className="sec-title" >   Chọn đúng danh mục <br />Xây dựng sự nghiệp của bạn</h3>
                         </div>
                     </div>
                 </div>
@@ -17,13 +18,13 @@ const Category = () => {
                     <div className="col-md-3 col-sm-6">
                         <Link href="#" className="icon-list-block">
                             <img src="https://raw.githubusercontent.com/ninehcobra/free-host-image/main/DoAn2/categories/1.png" alt="" />
-                            <span>IT &amp; Software</span>
+                            <span>CNTT &amp; Phần mềm</span>
                         </Link>
                     </div>
                     <div className="col-md-3 col-sm-6">
                         <Link href="#" className="icon-list-block">
                             <img src="https://raw.githubusercontent.com/ninehcobra/free-host-image/main/DoAn2/categories/2.png" alt="" />
-                            <span>Data science</span>
+                            <span>Khoa học dữ liệu</span>
                         </Link>
                     </div>
                     <div className="col-md-3 col-sm-6">
@@ -35,7 +36,7 @@ const Category = () => {
                     <div className="col-md-3 col-sm-6">
                         <Link href="#" className="icon-list-block">
                             <img src="https://raw.githubusercontent.com/ninehcobra/free-host-image/main/DoAn2/categories/4.png" alt="" />
-                            <span>Graphics design</span>
+                            <span>Thiết kế đồ họa</span>
                         </Link>
                     </div>
                     <div className="col-md-3 col-sm-6">
@@ -47,19 +48,19 @@ const Category = () => {
                     <div className="col-md-3 col-sm-6">
                         <Link href="#" className="icon-list-block">
                             <img src="https://raw.githubusercontent.com/ninehcobra/free-host-image/main/DoAn2/categories/6.png" alt="" />
-                            <span>Music</span>
+                            <span>Âm nhạc</span>
                         </Link>
                     </div>
                     <div className="col-md-3 col-sm-6">
                         <Link href="#" className="icon-list-block">
                             <img src="https://raw.githubusercontent.com/ninehcobra/free-host-image/main/DoAn2/categories/7.png" alt="" />
-                            <span>Photography</span>
+                            <span>Nhiếp ảnh</span>
                         </Link>
                     </div>
                     <div className="col-md-3 col-sm-6">
                         <Link href="#" className="icon-list-block">
                             <img src="https://raw.githubusercontent.com/ninehcobra/free-host-image/main/DoAn2/categories/8.png" alt="" />
-                            <span>Self Development</span>
+                            <span>Tâm lý học</span>
                         </Link>
                     </div>
                 </div>

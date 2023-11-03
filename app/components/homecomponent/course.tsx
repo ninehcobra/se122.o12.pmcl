@@ -23,7 +23,7 @@ const Course = () => {
                 <div className="row">
                     <div className="col-lg-7 col-md-9 m-auto text-center">
                         <div className="sec-heading">
-                            <h3 className="sec-title">Popular Courses</h3>
+                            <h3 className="sec-title">Các khóa học nổi bật</h3>
                         </div>
                     </div>
                 </div>
@@ -52,7 +52,7 @@ const Course = () => {
                                         <span className="enrolled">(330)</span>
                                     </div>
                                     <div className="course-meta text-right">
-                                        <strong className="course-price">$29.00</strong>
+
                                         <a href="#" className="btn btn-filled">Enroll now</a>
                                     </div>
                                 </div>
@@ -83,7 +83,7 @@ const Course = () => {
                                         <span className="enrolled">(330)</span>
                                     </div>
                                     <div className="course-meta text-right">
-                                        <strong className="course-price">$29.00</strong>
+
                                         <a href="#" className="btn btn-filled">Enroll now</a>
                                     </div>
                                 </div>
@@ -114,7 +114,7 @@ const Course = () => {
                                         <span className="enrolled">(330)</span>
                                     </div>
                                     <div className="course-meta text-right">
-                                        <strong className="course-price">$29.00</strong>
+
                                         <a href="#" className="btn btn-filled">Enroll now</a>
                                     </div>
                                 </div>
@@ -145,7 +145,7 @@ const Course = () => {
                                         <span className="enrolled">(330)</span>
                                     </div>
                                     <div className="course-meta text-right">
-                                        <strong className="course-price">$29.00</strong>
+
                                         <a href="#" className="btn btn-filled">Enroll now</a>
                                     </div>
                                 </div>
@@ -176,7 +176,7 @@ const Course = () => {
                                         <span className="enrolled">(330)</span>
                                     </div>
                                     <div className="course-meta text-right">
-                                        <strong className="course-price">$29.00</strong>
+
                                         <a href="#" className="btn btn-filled">Enroll now</a>
                                     </div>
                                 </div>
@@ -207,7 +207,7 @@ const Course = () => {
                                         <span className="enrolled">(330)</span>
                                     </div>
                                     <div className="course-meta text-right">
-                                        <strong className="course-price">$29.00</strong>
+
                                         <a href="#" className="btn btn-filled">Enroll now</a>
                                     </div>
                                 </div>

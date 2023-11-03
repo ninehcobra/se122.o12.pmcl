@@ -15,7 +15,7 @@ const Header = () => {
                     </Link>
                     <ul className="navbar-nav">
                         <li className="has-menu-child">
-                            <Link href="">HOME</Link>
+                            <Link href="">TRANG CHỦ</Link>
                             <ul className="sub-menu">
                                 <li>
                                     <Link href={""}>Home 1</Link>
@@ -30,25 +30,25 @@ const Header = () => {
                             <i className="menu-dropdown fa-solid fa-chevron-down"></i>
                         </li>
                         <li className="has-menu-child">
-                            <Link href="">ABOUT</Link>
+                            <Link href="">CHÚNG TÔI</Link>
                         </li>
                         <li className="has-menu-child">
-                            <Link href="">COURSES</Link>
+                            <Link href="">KHÓA HỌC</Link>
                         </li>
                         <li className="has-menu-child">
-                            <Link href="">BLOG</Link>
+                            <Link href="">BLOGS</Link>
                         </li>
                         <li className="has-menu-child">
-                            <Link href="">EVENTS</Link>
+                            <Link href="">SỰ KIỆN</Link>
                         </li>
                         <li className="has-menu-child">
                             <Link href="">PAGES</Link>
                         </li>
                         <li className="has-menu-child">
-                            <Link href="">CONTACT</Link>
+                            <Link href="">LIÊN HỆ</Link>
                         </li>
                         <li className="has-menu-child">
-                            <Link href="">LOG IN</Link>
+                            <Link href="/login">ĐĂNG NHẬP</Link>
                         </li>
                     </ul>
                 </nav>

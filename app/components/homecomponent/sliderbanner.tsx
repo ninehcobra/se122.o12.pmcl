@@ -42,18 +42,18 @@ const SliderBanner = () => {
             <div className="container">
                 <div className="col-md-11 text-center m-auto slider-content">
                     <h2>
-                        <span>EDUCATE!</span>
-                        SMART IS GREAT
+                        <span>GIÁO DỤC!</span>
+                        THÔNG MINH THẬT TUYỆT VỜI
                     </h2>
                     <div className={'search-form'}>
 
                         <div className={openCate ? "search-select open" : "search-select"} onClick={() => setOpenCate(!openCate)}>
-                            <span>All Catergories</span>
+                            <span>Tất cả</span>
                             <ul className={openCate ? "list list-open" : "list"}>
-                                <li data-value="All Categories" className="option selected focus">All Categories</li>
-                                <li data-value="usa" className="option">IT &amp; Software</li>
-                                <li data-value="canada" className="option">Development</li>
-                                <li data-value="australia" className="option">Marketing &amp; SEO</li>
+                                <li data-value="All Categories" className="option selected focus">Tất cả</li>
+                                <li data-value="usa" className="option">CNTT &amp; Phần mềm</li>
+                                <li data-value="canada" className="option">Âm nhạc</li>
+                                <li data-value="australia" className="option">Thiết kế đồ họa</li>
                             </ul>
                         </div>
                         <input type="text" className="text" />

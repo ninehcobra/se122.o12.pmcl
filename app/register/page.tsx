@@ -1,119 +1,146 @@
 'use client'
 import Link from 'next/link';
-import './register.css'
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Image from 'next/image'
+import '../login/login.scss'
+import Header from '../components/homecomponent/header';
+import Footer from '../components/homecomponent/footer';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation'
+import axios from 'axios';
+import { registerNewUser } from "../../services/userService"
+import { toast, ToastContainer } from 'react-toastify';
+
 
 export default function Login() {
 
     const router = useRouter()
 
-    const [userName, setUserName] = useState('')
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [rePassword, setRePassword] = useState('')
-    const [isValid, setIsValid] = useState(true)
-    const [isSame, setIsSame] = useState(true)
+    const [name, setName] = useState('')
+    const [isChecked, setIsChecked] = useState(false);
+
+    const [inputFailure, setInputFailure] = useState(0)
+
 
     const onChangeInput = (value: any, type: any): void => {
-        setIsValid(true)
-        setIsSame(true)
-        if (type === 'username') {
-            setUserName(value)
+
+        if (type === 'email') {
+            setEmail(value)
         }
         else if (type === 'password') {
             setPassword(value)
         }
-        else if (type === 'repassword') {
-            setRePassword(value)
+        else if (type === 'name') {
+            setName(value)
         }
     }
 
     const inputValidation = () => {
-        let usernameRegex = /^[a-zA-Z0-9_]{3,20}$/;
-        let passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/
-        if (userName === '' || password === '' || usernameRegex.test(userName) === false || passwordRegex.test(password) === false) {
-            setIsValid(false)
-        }
-        else if (password !== rePassword) {
-            setIsSame(false)
+        let emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+        let passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+        let nameRegex = /^[a-zA-Z]+ [a-zA-Z]+$/;
+
+
+        if (email && password && name) {
+
+            if (!nameRegex.test(name)) {
+                setInputFailure(1)
+
+                return false
+            }
+            if (!emailRegex.test(email)) {
+                setInputFailure(2)
+                return false
+            }
+            if (!passwordRegex.test(password)) {
+                setInputFailure(3)
+                return false
+            }
+            setInputFailure(0)
+            return true
+
         }
         else {
-            router.push('/dashboard')
+            setInputFailure(4)
+            return false
         }
     }
 
-    const onLogin = () => {
-        inputValidation()
+
+
+    const handleRegister = async () => {
+        if (inputValidation()) {
+            if (isChecked) {
+                let res = await registerNewUser(email, name, password)
+                if (res.data.EC === 1) {
+                    toast.error('Email này đã được đăng ký❗️')
+                }
+                else if (res.data.EC === 2) {
+                    toast.error('Lỗi EC2 phía server❗️')
+                }
+                else if (res.data.EC === -2) {
+                    toast.error('Lỗi EC-2 không xác định phía server❗️')
+                }
+                else if (res.data.EC === 0) {
+                    toast('Đăng ký thành công🥳🥳🥳')
+                }
+            }
+            else {
+                setInputFailure(5)
+            }
+        }
+
     }
 
     return (
-        <div className="login-container">
-            <div className='register-form '>
-                <div className='container '>
-                    <div className='row' >
-                        <div className='col-lg-8 ' style={{ padding: '0 20px' }}>
-                            <div className='container'>
-                                <div className='login-header'>
-                                    <div style={{ color: "rgba(235,236,238,255)", fontSize: "20px", fontWeight: 'bold', marginBottom: '5px' }}>Chào mừng trở lại!</div>
-                                    <div style={{ color: "#9ea3aa", marginBottom: '15px' }}>Rất vui mừng khi được gặp lại bạn!</div>
-                                </div>
-                                <Form.Label className={isValid ? 'login-label' : 'login-label error-text'} htmlFor="inputPassword5">EMAIL HOẶC SỐ ĐIỆN THOẠI
+        <div>
+            <Header></Header>
 
-                                    {isValid ? <span style={{ marginLeft: '4px', color: 'red' }}>*</span> : <span style={{ marginLeft: '4px', color: '#ed7277', fontStyle: 'italic' }}>Tên đăng nhập hoặc mật khẩu không hợp lệ.</span>}
-                                </Form.Label>
-                                <Form.Control
-                                    className='login-input'
-                                    type="email"
-                                    id="inputPassword5"
-                                    aria-describedby="passwordHelpBlock"
-                                    value={userName}
-                                    onChange={(e) => onChangeInput(e.target.value, 'username')}
-                                />
-                                <Form.Label className={isValid ? 'login-label' : 'login-label error-text'} htmlFor="inputPassword5">MẬT KHẨU
-                                    {isValid ? <span style={{ marginLeft: '4px', color: 'red' }}>*</span> : <span style={{ marginLeft: '4px', color: '#ed7277', fontStyle: 'italic' }}>Tên đăng nhập hoặc mật khẩu không hợp lệ.</span>}
-                                </Form.Label>
-                                <Form.Control
-                                    className='login-input'
-                                    type="password"
-                                    id="inputPassword5"
-                                    aria-describedby="passwordHelpBlock"
-                                    value={password}
-                                    onChange={(e) => onChangeInput(e.target.value, 'password')}
-                                />
-                                <Form.Label className={isSame ? 'login-label' : 'login-label error-text'} htmlFor="inputPassword5">NHẬP LẠI MẬT KHẨU
-                                    {isSame ? <span style={{ marginLeft: '4px', color: 'red' }}>*</span> : <span style={{ marginLeft: '4px', color: '#ed7277', fontStyle: 'italic' }}>Mật khẩu không trùng khớp.</span>}
-                                </Form.Label>
-                                <Form.Control
-                                    className='login-input'
-                                    type="password"
-                                    id="inputPassword5"
-                                    aria-describedby="passwordHelpBlock"
-                                    value={rePassword}
-                                    onChange={(e) => onChangeInput(e.target.value, 'repassword')}
-                                />
-
-                                <Button onClick={() => onLogin()} className='login-btn'>Đăng ký</Button>
-                                <div style={{ color: "#9ea3aa", fontSize: '14px' }}>Đã có tài khoản
-                                    <Link className="nav-text" href={"/login"}> Đăng nhập</Link>
-                                </div>
+            <section className="banner login-registration">
+                <div className="vector-img">
+                    <img src="https://raw.githubusercontent.com/ninehcobra/free-host-image/main/DoAn2/login.png" alt="" />
+                </div>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-6">
+                            <div className="content-box">
+                                <h2>Đăng ký</h2>
+                                <p>Đăng ký để bắt đầu học ngay hôm nay! 📚</p>
                             </div>
+                            <div className="sl-form">
+                                <div className="form-group">
+                                    <label>Họ và tên
+                                        {inputFailure === 4 && name === '' ? <span style={{ color: 'red' }}>  - Vui lòng nhập đầy đủ họ và tên</span> : inputFailure === 1 ? <span style={{ color: 'red' }}> -  Họ và tên không được bao gồm số</span> : <div></div>}
+                                    </label>
+                                    <input onChange={(e) => onChangeInput(e.target.value, 'name')} value={name} type="text" placeholder="Nguyễn Văn A" required />
+                                </div>
+                                <div className="form-group">
+                                    <label>Email
+                                        {inputFailure === 4 && email === '' ? <span style={{ color: 'red' }}>  - Vui lòng nhập email</span> : inputFailure === 2 ? <span style={{ color: 'red' }}> - Vui lòng nhập email chính xác</span> : <div></div>}
+                                    </label>
 
-                        </div>
-                        <div className='col-lg-4 d-none d-lg-block' >
-                            <div className='logo-container'>
-                                <Image src={'https://raw.githubusercontent.com/ninehcobra/free-host-image/main/News/logo.png'} width={200} height={200} alt={'logo app'}></Image>
-                                <div style={{ fontSize: '22px', fontWeight: 'bold' }}>Nineh</div>
-                                <div style={{ fontSize: '14px', textAlign: 'center' }}>Giải pháp <span style={{ fontWeight: 'bold' }}>{`học nhóm trực tuyến `}</span>
-                                    có mặt trên cả nền tảng <span style={{ fontWeight: 'bold' }} > Web</span> và <span style={{ fontWeight: 'bold' }} > Mobile</span></div>
+                                    <input onChange={(e) => onChangeInput(e.target.value, 'email')} value={email} type="email" placeholder="example@gmail.com" required />
+                                </div>
+                                <div className="form-group">
+                                    <label>Mật khẩu
+                                        {inputFailure === 4 && password === '' ? <span style={{ color: 'red' }}>  - Vui lòng nhập mật khẩu</span> : inputFailure === 3 ? <span style={{ color: 'red' }}> -  Mật khẩu phải chứa ít nhất 8 ký tự và có ít nhất một chữ số, chữ cái thường và in hoa  </span> : <div></div>}
+                                    </label>
+                                    <input onChange={(e) => onChangeInput(e.target.value, 'password')} value={password} type="password" placeholder="Password" required />
+                                </div>
+
+                                <div className="form-check">
+                                    <input onChange={() => setIsChecked(!isChecked)} checked={isChecked} type="checkbox" className="form-check-input" />
+                                    <label className="form-check-label">Đồng ý với các điều khoản{inputFailure === 5 ? <span style={{ color: 'red' }}> - Vui lòng đọc và đồng ý các điều khoản của chúng tôi</span> : ''}</label>
+                                </div>
+                                <button onClick={handleRegister} className="btn btn-filled btn-round"><span className="bh"></span> <span>Đăng ký</span></button>
+                                <p className="notice">Đã có tài khoản <Link href="/login">Đăng nhập Ngay</Link></p>
                             </div>
                         </div>
                     </div>
-
                 </div>
-            </div>
+            </section>
+
+            <Footer></Footer>
         </div>
     )
 }
