@@ -25,7 +25,6 @@ export default function Home() {
       <Blog></Blog>
       <Testimonial></Testimonial>
       <Callto></Callto>
-      <Footer></Footer>
     </div>
   )
 }

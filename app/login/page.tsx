@@ -117,7 +117,6 @@ export default function Login() {
             </section>
 
 
-            <Footer></Footer>
         </div>
 
     )

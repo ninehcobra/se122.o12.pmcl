@@ -140,7 +140,7 @@ export default function Login() {
                 </div>
             </section>
 
-            <Footer></Footer>
+
         </div>
     )
 }
