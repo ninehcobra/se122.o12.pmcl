@@ -54,7 +54,7 @@
                 list-style-type: none;
                 margin-top: 4px;
 
-                .onSelect {
+                .onselect {
                     background-color: #e8ebed !important;
                 }
 
@@ -118,7 +118,7 @@
                 border-radius: 16px;
                 height: 270px;
                 overflow: hidden;
-                display: flex;
+                display: flex !important;
 
                 .slideshow_left {
                     color: #fff;
@@ -178,8 +178,168 @@
                         line-height: 1.6;
                     }
                 }
+
+                .slideshow_right {
+                    display: flex;
+                    flex: 3 1;
+                    justify-content: flex-end;
+
+                    a {
+                        outline: none;
+                        text-decoration: none;
+                        -webkit-tap-highlight-color: transparent;
+                        background-color: transparent;
+
+                        img {
+                            height: 100%;
+                            object-fit: cover;
+                            display: block;
+                            border-style: none;
+                        }
+                    }
+                }
             }
 
+        }
+    }
+
+    .home_wrapper {
+        margin-top: 70px;
+        overflow: hidden;
+        padding: 0 44px 74px;
+
+        .scrolllist {
+            margin-bottom: 8px;
+
+            .scrolllist_heading_wrapper {
+                align-items: baseline;
+                display: flex;
+
+                .scrolllist_heading {
+                    color: #242424;
+                    font-size: 24px;
+                    font-weight: 900;
+                    margin-right: auto;
+                    margin-top: 16px;
+
+                    .scrolllist_label {
+                        background-color: #1473e6;
+                        border-radius: 4px;
+                        color: #fff;
+                        font-size: 12px;
+                        font-weight: 500;
+                        padding: 3px 6px;
+                        position: relative;
+                        right: -8px;
+                        text-transform: uppercase;
+                        top: -6px;
+                    }
+                }
+            }
+
+            .scrolllist_body {
+                min-height: 200px;
+                padding-bottom: 0;
+                margin-top: 15px;
+
+
+
+                .scrolllist_section {
+                    margin-left: -12px;
+                    margin-right: -12px;
+                    display: flex;
+                    flex-wrap: wrap;
+
+
+                    .scrolllist_item_wrap {
+                        width: 25%;
+                        display: block;
+                        padding-left: 12px;
+                        padding-right: 12px;
+
+                        .scrolllist_item_wrapper {
+                            overflow: unset;
+                            position: relative;
+                            margin-bottom: 32px;
+
+                            .scrolllist_item {
+                                outline: none;
+                                text-decoration: none;
+                                border-radius: 16px;
+                                display: block;
+                                object-fit: cover;
+                                overflow: hidden;
+                                padding-top: 56.25%;
+                                position: relative;
+                                width: 100%;
+                                -webkit-tap-highlight-color: transparent;
+
+                                .scrolllist_btn {
+                                    background-color: #fff;
+                                    border-color: #fff;
+                                    color: #000;
+                                    left: 50%;
+                                    opacity: 0;
+                                    position: absolute;
+                                    top: 60%;
+                                    user-select: none;
+                                    white-space: nowrap;
+                                    transform: translate(-50%, -50%);
+                                    transition: all .3s ease 0s;
+                                    visibility: hidden;
+                                    z-index: 1;
+                                    display: inline-block;
+                                    font-size: 1.4rem;
+                                    font-weight: 600;
+                                    outline: none;
+                                    padding: 9px 16px;
+                                    text-align: center;
+                                    border: 1px solid #f05123;
+                                    border-radius: 999px !important;
+
+
+                                }
+
+                                .scrolllist_item_thumb {
+                                    height: 100%;
+                                    left: 0;
+                                    object-fit: cover;
+                                    position: absolute;
+                                    top: 0;
+                                    width: 100%;
+                                    border-style: none;
+                                    overflow-clip-margin: content-box;
+                                    overflow: clip;
+                                }
+                            }
+
+                            .scrolllist_title {
+                                display: block;
+                                font-size: 1.17em;
+                                margin-block-start: 1em;
+                                margin-block-end: 1em;
+                                margin-inline-start: 0px;
+                                margin-inline-end: 0px;
+                                font-weight: 600;
+                            }
+
+                            .price {
+                                .old_price {
+                                    font-size: 14px;
+                                    margin-right: 8px;
+                                    text-decoration: line-through;
+                                }
+
+                                .main_price {
+                                    color: #f05123;
+                                    font-size: 16px;
+                                    font-weight: 600;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

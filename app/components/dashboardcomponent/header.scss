@@ -203,6 +203,15 @@ body {
                             padding: 8px 12px;
                             transition: background-color .3s;
 
+                            &:hover {
+                                border-radius: 10px;
+                                display: flex;
+                                margin: 0 8px;
+                                padding: 8px 12px;
+                                transition: background-color .3s;
+                                background-color: rgba(22, 24, 35, .05);
+                            }
+
                             a {
                                 -webkit-tap-highlight-color: transparent;
                                 text-decoration: none;

@@ -1,0 +1,318 @@
+.main_content {
+    width: 100%;
+    max-width: 1920px;
+    padding: 0;
+    margin: 0 auto;
+
+    .layout_container {
+        margin-bottom: 60px;
+        padding: 8px 44px 0;
+
+        .layout_container_top {
+            margin-bottom: 80px;
+            margin-top: 20px;
+
+            .layout_heading {
+                color: #242424;
+                font-size: 28px;
+                font-weight: 900;
+            }
+
+            .layout_desc {
+                --font-size: 15px;
+                --line-height: 1.6;
+                word-wrap: break-word;
+                color: #292929;
+                font-size: 1.8rem;
+                font-size: var(--font-size, 1.8rem);
+                line-height: 2;
+                line-height: var(--line-height, 2);
+
+                p {
+                    margin: 6px 0;
+                }
+            }
+        }
+
+        .container_body {
+            .section_content {
+                margin-left: -12px;
+                margin-right: -12px;
+                display: flex;
+                flex-wrap: wrap;
+
+                .section_left {
+                    width: 66.66667%;
+
+                    .blog_layout {
+                        padding: 0 64px 44px 0;
+
+                        .pagination_wrapper {
+                            align-items: center;
+                            display: flex;
+                            font-size: 1.4rem;
+                            justify-content: center;
+                            margin-top: 20px;
+                            position: relative;
+
+                            .pagination_pages {
+                                align-items: center;
+                                display: flex;
+                                padding: 0 10px;
+
+                                .pagination_page {
+                                    border: 1px solid #fff;
+                                    color: #d0d7de;
+                                    cursor: default;
+                                    margin-right: 4px;
+                                    padding: 6px 12px;
+                                    display: flex;
+                                    font-weight: 500;
+                                    transition: all .2s;
+                                    border-radius: 6px;
+
+                                    svg {
+                                        overflow: visible;
+                                        box-sizing: content-box;
+                                        font-size: 12px;
+                                        display: var(--fa-display, inline-block);
+                                        height: 1em;
+                                        vertical-align: -0.125em;
+                                    }
+                                }
+                            }
+                        }
+
+                        .post_item_wrapper {
+                            border: 2px solid #e8e8e8;
+                            border-radius: 16px;
+                            padding: 24px;
+                            margin-bottom: 18px;
+
+                            .post_item_header {
+                                align-items: center;
+                                display: flex;
+                                justify-content: space-between;
+
+                                .post_item_author {
+                                    align-items: center;
+                                    display: flex;
+
+                                    a {
+                                        -webkit-tap-highlight-color: transparent;
+                                        text-decoration: none;
+
+                                        .fallback_avatar {
+                                            --font-size: 2.9px;
+                                            align-items: center;
+                                            background: linear-gradient(180deg, #ffd900, #b45264 93.68%);
+                                            display: flex;
+                                            justify-content: center;
+                                            padding: 0.7em;
+                                            position: relative;
+                                            border-radius: 50%;
+                                            font-size: var(--font-size);
+
+                                            img {
+                                                border-radius: 50%;
+                                                height: 9em;
+                                                object-fit: cover;
+                                                width: 9em;
+                                                flex-shrink: 0;
+                                            }
+                                        }
+
+                                        span {
+                                            color: #292929;
+                                            font-size: 12px;
+                                            font-weight: 600;
+                                            margin-left: 8px;
+                                        }
+                                    }
+                                }
+
+                                .post_item_action {
+                                    color: #757575;
+                                    display: flex;
+                                    font-size: 1.6rem;
+                                    margin-right: -8px;
+                                    user-select: none;
+
+                                    .bookmark_toggle {
+                                        cursor: pointer;
+                                        padding: 4px 8px;
+                                        color: #757575;
+
+                                        svg {
+                                            overflow: visible;
+                                            box-sizing: content-box;
+                                            display: var(--fa-display, inline-block);
+                                            height: 0.7em;
+                                            vertical-align: -0.125em;
+                                        }
+                                    }
+
+                                    .option_btn {
+                                        cursor: pointer;
+                                        padding: 4px 8px;
+
+                                        svg {
+                                            overflow: visible;
+                                            box-sizing: content-box;
+                                            display: var(--fa-display, inline-block);
+                                            height: 0.7em;
+                                            vertical-align: -0.125em;
+                                        }
+                                    }
+                                }
+                            }
+
+                            .post_item_body {
+                                align-items: center;
+                                display: flex;
+
+
+                                .post_item_info {
+                                    flex: 1 1;
+                                    padding-right: 32px;
+                                    font-size: 14px;
+
+                                    a {
+                                        outline: none;
+                                        text-decoration: none;
+
+                                        .post_item_title {
+                                            color: #292929;
+                                            font-size: 20px;
+                                            font-weight: 700;
+                                            line-height: 1.6;
+                                            margin-bottom: 0;
+                                            margin-top: 8px;
+                                        }
+                                    }
+
+                                    .post_item_desc {
+                                        color: #505050;
+                                        font-size: 15px;
+                                        line-height: 1.6;
+                                        margin-top: 4px;
+                                    }
+
+                                    .post_item_info {
+                                        font-size: 14px;
+                                        padding-right: 32px;
+
+                                        .post_item_tag {
+                                            background-color: #f2f2f2;
+                                            border-radius: 100px;
+                                            color: #333;
+                                            font-weight: 500;
+                                            line-height: 20px;
+                                            margin-right: 12px;
+                                            padding: 4px 10px;
+                                        }
+
+                                        span {
+                                            font-size: 14px;
+                                        }
+                                    }
+                                }
+
+                                .post_item_thumb {
+                                    flex-shrink: 0;
+
+                                    a {
+                                        outline: none;
+                                        text-decoration: none;
+
+                                        img {
+                                            background: #ebebeb;
+                                            border-radius: 15px;
+                                            color: #757575;
+                                            display: block;
+                                            font-size: 1.4rem;
+                                            line-height: 1.8;
+                                            max-height: 120px;
+                                            object-fit: cover;
+                                            overflow: hidden;
+                                            text-align: center;
+                                            width: 200px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .section_right {
+                    width: 33.33333%;
+                    display: block;
+                    padding-left: 12px;
+                    padding-right: 12px;
+
+                    .topiclist_wrapper {
+                        h3 {
+                            color: #757575;
+                            font-size: 14px;
+                            font-weight: 500;
+                            line-height: 1.8;
+                            text-transform: uppercase;
+                        }
+
+                        .topiclist {
+                            display: flex;
+                            flex-wrap: wrap;
+                            font-size: 14px;
+                            padding-left: 0;
+                            list-style: none;
+
+                            li {
+                                a {
+                                    background-color: #f2f2f2;
+                                    border-radius: 30px;
+                                    color: #333;
+                                    display: block;
+                                    font-weight: 500;
+                                    line-height: 1.8;
+                                    margin: 0 8px 8px 0;
+                                    padding: 6px 16px;
+                                    text-decoration: none;
+                                    user-select: none;
+                                }
+                            }
+                        }
+                    }
+
+                    .banner_wrapper {
+                        --sticky: 80px;
+                        --align: flex-start;
+                        position: sticky;
+                        top: var(--sticky);
+                        display: flex;
+                        justify-content: var(--align, flex-end);
+
+                        .banner_content {
+                            display: flex;
+                            flex-direction: column;
+                            max-width: 300px;
+
+                            a {
+                                outline: none;
+                                text-decoration: none;
+                                margin-top: 32px;
+
+                                img {
+                                    border-radius: 8px;
+                                    max-width: 100%;
+                                    object-fit: cover;
+                                    width: 100%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
