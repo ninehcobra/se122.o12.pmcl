@@ -26,6 +26,7 @@ export default function Login() {
             // Nếu có thông tin trong localStorage, điền vào các trường đăng nhập
             setEmail(savedEmail);
             setPassword(savedPassword);
+            setIsChecked(true)
         }
     }, []);
 
@@ -51,12 +52,21 @@ export default function Login() {
         return true
     }
 
-    const onLogin = () => {
+    const onLogin = async () => {
 
         if (inputValidation()) {
-            console.log(2)
-            let data = login(email, password)
-            saveLoginInfo()
+            let res = await login(email, password)
+
+            if (res && res.data && res.data.EC === 0) {
+                let data = {
+                    isAuthenticated: true,
+                    token: 'faketoken'
+                }
+                sessionStorage.setItem('account', JSON.stringify(data))
+                router.push('/dashboard')
+                saveLoginInfo()
+            }
+
         }
 
     }

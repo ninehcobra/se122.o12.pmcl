@@ -3,6 +3,7 @@ import Link from "next/link"
 import Header from "../components/dashboardcomponent/header"
 import "./dashboard.scss"
 import { usePathname } from "next/navigation"
+import { AuthCheck } from '../components/homecomponent/authcheck';
 
 const DashboardLayout = ({
     children,
@@ -13,6 +14,7 @@ const DashboardLayout = ({
     console.log(pathname === '/dashboard')
     return (
         <div>
+            <AuthCheck />
             <Header></Header>
             <div className="app_sidebar">
                 <div className="app_sidebar_wrap">
@@ -61,6 +63,7 @@ const DashboardLayout = ({
             </div>
 
         </div>
+
     )
 }
 

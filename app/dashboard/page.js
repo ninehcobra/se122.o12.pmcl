@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Slider from "react-slick";
 import "./dashboard.scss"
 
+
 export default function Dashboard() {
 
     const settings = {

@@ -1,0 +1,164 @@
+body {
+    color: #83868c !important;
+    background-color: #fff !important;
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 400 !important;
+    font-size: 15px !important;
+    line-height: 27px !important;
+    --primary-color: #f05123;
+    --white-color: #fff;
+
+}
+
+
+
+.notfound {
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+    height: 100vh;
+    min-height: 100%;
+    min-width: 100%;
+    color: #000;
+
+    .notfound_header_wrapper {
+        align-items: center;
+        display: flex;
+        padding: 20px;
+
+        .notfound_logo_link {
+            outline: none;
+            text-decoration: none;
+            display: block;
+
+            .notfound_logo {
+                border-radius: 8px;
+                flex-shrink: 0;
+                height: 45px;
+                object-fit: contain;
+                width: 45px;
+                border-style: none;
+            }
+        }
+
+        .notfound_product_name {
+            margin-top: 12px;
+            font-size: 14px;
+            font-weight: 900;
+            margin-left: 12px;
+            text-align: center;
+
+            a {
+                color: #242424;
+                outline: none;
+                text-decoration: none;
+            }
+        }
+    }
+
+    .notfound_content {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        min-width: 300px;
+
+        .notfound_error {
+            display: block;
+            height: 200px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                width: 200px;
+                height: 200px;
+            }
+
+        }
+
+        .notfound_error_title {
+            font-weight: 900;
+            font-size: 45px;
+            line-height: 1.6;
+            margin-top: 0;
+            text-align: center;
+
+        }
+
+        ul {
+            margin: 16px 0 24px;
+            padding: 0;
+            list-style-type: none;
+
+            .notfound_suggest {
+                list-style: none;
+                list-style-position: inside;
+                padding-bottom: 0.4em;
+                text-align: center;
+                font-weight: 500;
+                line-height: 1.6;
+
+                strong {
+                    font-weight: 600;
+                    margin: 0 5px;
+                    color: (var(--primary-color))
+                }
+            }
+
+            .notfound_suggestion {
+                list-style: none;
+                list-style-position: inside;
+                padding-bottom: 0.4em;
+                text-align: center;
+                font-weight: 500;
+                line-height: 1.6;
+
+                strong {
+                    font-weight: 600;
+                    margin: 0 5px;
+                    color: (var(--primary-color))
+                }
+            }
+        }
+
+        p {
+            font-size: 15px;
+
+
+            .notfound_home_btn {
+
+                background-color: var(--primary-color);
+                color: var(--white-color);
+                outline: none;
+                text-decoration: none;
+                font-size: 16px;
+                padding: 14px 28px;
+                appearance: none;
+                border: 1px solid var(--primary-color);
+                border-radius: 999px !important;
+                display: inline-block;
+                text-align: center;
+                transition: .3s ease;
+                font-weight: 600;
+            }
+
+            .notfound_mycourse_btn {
+                outline: none;
+                text-decoration: none;
+                padding-left: 8px;
+                background-color: #fff !important;
+                border: none !important;
+                color: #333 !important;
+                font-weight: 700 !important;
+                text-transform: uppercase;
+                border-radius: 999px !important;
+                display: inline-block;
+                font-size: 14px;
+                padding: 9px 16px;
+                text-align: center;
+                transition: .3s ease;
+            }
+        }
+    }
+}
