@@ -31,7 +31,7 @@ export default function Login() {
     }, []);
 
 
-    const onChangeInput = (value: any, type: any): void => {
+    const onChangeInput = (value, type) => {
         setIsValid(true)
         if (type === 'email') {
             setEmail(value)
@@ -57,7 +57,7 @@ export default function Login() {
         if (inputValidation()) {
             let res = await login(email, password)
 
-            if (res && res.data && res.data.EC === 0) {
+            if (res && res.EC === 0) {
                 let data = {
                     isAuthenticated: true,
                     token: 'faketoken'

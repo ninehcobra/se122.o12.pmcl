@@ -1,16 +1,19 @@
-import axios from 'axios'
+import axios from '../setup/axios'
 
 const registerNewUser = async (email, name, password) => {
-    let res = axios.post("http://localhost:8080/api/register", {
+    let res = axios.post("/api/register", {
         email, password, name
     })
     return res
 }
 
 const login = async (email, password) => {
-    let res = axios.post("http://localhost:8080/api/login", {
+    let res = axios.post("/api/login", {
         email, password
-    })
+    }
+
+
+    )
     return res
 }
 

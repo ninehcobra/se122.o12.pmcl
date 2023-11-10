@@ -72,16 +72,16 @@ export default function Login() {
         if (inputValidation()) {
             if (isChecked) {
                 let res = await registerNewUser(email, name, password)
-                if (res.data.EC === 1) {
+                if (res.EC === 1) {
                     toast.error('Email này đã được đăng ký❗️')
                 }
-                else if (res.data.EC === 2) {
+                else if (res.EC === 2) {
                     toast.error('Lỗi EC2 phía server❗️')
                 }
-                else if (res.data.EC === -2) {
+                else if (res.EC === -2) {
                     toast.error('Lỗi EC-2 không xác định phía server❗️')
                 }
-                else if (res.data.EC === 0) {
+                else if (res.EC === 0) {
                     toast('Đăng ký thành công🥳🥳🥳')
                 }
             }
