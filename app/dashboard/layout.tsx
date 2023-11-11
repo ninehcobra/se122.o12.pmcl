@@ -5,6 +5,7 @@ import "./dashboard.scss"
 import { usePathname } from "next/navigation"
 import { AuthCheck } from '../components/homecomponent/authcheck';
 
+
 const DashboardLayout = ({
     children,
 }: {
@@ -13,6 +14,7 @@ const DashboardLayout = ({
     const pathname = usePathname()
     console.log(pathname === '/dashboard')
     return (
+
         <div>
             <AuthCheck />
             <Header></Header>
@@ -63,6 +65,8 @@ const DashboardLayout = ({
             </div>
 
         </div>
+
+
 
     )
 }

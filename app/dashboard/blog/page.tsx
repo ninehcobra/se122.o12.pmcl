@@ -1,11 +1,17 @@
 'use client'
 import { useEffect } from 'react'
 import "./blog.scss"
+import { useDispatch, useSelector } from 'react-redux'
 
 const Blog = () => {
     useEffect(() => {
 
     }, []);
+
+    const info = useSelector((state: any) => state.personalInfo)
+
+    const dispatch: any = useDispatch()
+    console.log(info)
 
     return (
         <section className='main_content'>

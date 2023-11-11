@@ -8,8 +8,16 @@ import Footer from '../components/homecomponent/footer';
 import Link from 'next/link';
 import { login } from "../../services/userService"
 
+import { useDispatch, useSelector } from 'react-redux'
+
 
 export default function Login() {
+
+    const info = useSelector((state) => state.personalInfo)
+
+    const dispatch = useDispatch()
+    console.log(info)
+
 
     const router = useRouter()
 

@@ -1,7 +1,11 @@
 import Link from "next/link"
 import "./header.scss"
 
+
 const Header = () => {
+    // const info = useSelector((state) => state.personalInfo)
+    // console.log('header nef', info)
+
     return (
         // Header
         <header >

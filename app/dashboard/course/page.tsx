@@ -1,21 +1,25 @@
 'use client'
 import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateEmail } from "../../../redux/actions/updateAction"
 
 const Course = () => {
-    useEffect(() => {
-        console.log('useEffect is called');
-        const timeout = setTimeout(() => {
-            console.log('loading');
-        }, 50000);
 
-        return () => {
-            clearTimeout(timeout);
-        };
-    }, []);
+    const info = useSelector((state: any) => state.personalInfo)
+
+    const dispatch: any = useDispatch()
+    console.log(info)
+
 
     return (
         <div>
-            course
+            <div>email:{info.email}</div>
+            <div>name:{info.name}</div>
+            <div>avatar:{info.avatar}</div>
+            <div>id:{info.id}</div>
+            <button onClick={() => {
+                dispatch(updateEmail('cac'))
+            }}>update</button>
         </div>
     )
 }

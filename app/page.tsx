@@ -1,3 +1,4 @@
+'use client'
 import Image from 'next/image'
 import Link from 'next/link'
 import Header from './components/homecomponent/header'
@@ -12,9 +13,20 @@ import Testimonial from './components/homecomponent/testimonial'
 import Callto from './components/homecomponent/callto'
 import Footer from './components/homecomponent/footer'
 
-export default function Home() {
+
+
+
+
+function Home() {
+
+
+
   return (
+
+
+
     <div>
+
       <Header></Header>
       <SliderBanner></SliderBanner>
       <FeatureBox></FeatureBox>
@@ -26,8 +38,12 @@ export default function Home() {
       <Testimonial></Testimonial>
       <Callto></Callto>
     </div>
+
+
+
   )
 }
 
+export default (Home)
 
 
