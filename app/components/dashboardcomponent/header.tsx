@@ -1,20 +1,29 @@
 import { useEffect, useState, useRef } from "react"
 import "./header.scss"
 import Link from "next/link"
+import { useSelector } from 'react-redux';
 
 const Header = () => {
     const [myCourse, setMyCourse] = useState(false)
+    const [userSetting, setUserSetting] = useState(false)
     const notificationRef = useRef<HTMLDivElement>(null);
+    const userSettingRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         const handleOutsideClick = (event: any) => {
-            if (notificationRef.current && !notificationRef.current.contains(event.target)) {
+            console.log(userSettingRef)
+            console.log(event.target);
+            if (
+                notificationRef.current &&
+                !notificationRef.current.contains(event.target) &&
+                userSettingRef.current &&
+                !userSettingRef.current.contains(event.target)
+            ) {
                 setMyCourse(false);
+                setUserSetting(false);
             }
-            else {
-                setMyCourse(false);
-            }
-        }
+
+        };
 
         document.addEventListener('click', handleOutsideClick);
         return () => {
@@ -22,14 +31,17 @@ const Header = () => {
         };
     }, [myCourse])
 
+    const info = useSelector((state: any) => state.personalInfo)
+    console.log(info)
+
     return (
         <div className="navbar_wrapper">
-            <div className="navbar_logo">
-                <Link href="/">
+            <Link href="/dashboard" style={{ textDecoration: 'none' }} className="navbar_logo">
+                <Link href="/dashboard">
                     <img src="https://raw.githubusercontent.com/ninehcobra/free-host-image/main/News/logo.png" alt="nineh" />
                 </Link>
                 <h4 className="navbar_logo_heading">Nineh Learning</h4>
-            </div>
+            </Link>
             <div className="navbar_body">
                 <div>
                     <div className="search" aria-expanded="false">
@@ -168,13 +180,61 @@ const Header = () => {
                         </svg>
                     </div>
                 </div>
-                <div className="navbar_avatar_wrapper" aria-expanded="false">
+                <div onClick={() => {
+
+                    setUserSetting(!userSetting)
+                    console.log(userSetting)
+                }} className="navbar_avatar_wrapper" ref={userSettingRef} aria-expanded="false">
                     <div className="fallback_avatar" >
                         <img className="navbar_avatar"
-                            src="https://files.fullstack.edu.vn/f8-prod/user_photos/224880/62d6ab1376ebc.jpg"
-                            alt="Trương Nguyễn Công Chính" />
+                            src={info.avatar}
+                            alt={info.name} />
                     </div>
                 </div>
+
+                {
+                    userSetting ?
+                        <div className="popup_info" >
+                            <ul className="user_wrapper">
+                                <div className="user_menu">
+                                    <div className="avatar_wrapper">
+                                        <div className="fallback_avatar">
+                                            <img src={info.avatar} alt="avatar" />
+                                        </div>
+                                    </div>
+                                    <div className="user_info">
+                                        <span>{info.name}</span>
+                                        <div className="user_email">{info.email}</div>
+                                    </div>
+                                </div>
+                                <hr />
+                                <ul className="user_list">
+                                    <li>
+                                        <Link className="user_item" href={`/user/${info.name}`}>Trang cá nhân</Link>
+                                    </li>
+                                </ul>
+                                <hr />
+                                <ul className="user_list">
+                                    <li>
+                                        <a className="user_item" href={`/dashboard/user/${info.name}`}>Viết blog</a>
+                                    </li>
+                                </ul>
+                                <ul className="user_list">
+                                    <li>
+                                        <a className="user_item" href={`/dashboard/user/${info.name}`}>Bài viết của tôi</a>
+                                    </li>
+                                </ul>
+                                <hr />
+                                <ul className="user_list">
+                                    <li>
+                                        <a className="user_item" href={`/dashboard/user/${info.name}`}>Đăng xuất</a>
+                                    </li>
+                                </ul>
+                            </ul>
+                        </div> :
+                        ''
+                }
+
             </div>
         </div>
     )

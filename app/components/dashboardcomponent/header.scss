@@ -132,6 +132,94 @@ body {
                 outline: none;
             }
 
+            .popup_info {
+                z-index: 9999;
+                position: absolute;
+                inset: 0px 0px auto auto;
+                margin: 0px;
+                transform: translate3d(-28px, 57.5px, 0px);
+                max-width: calc(100vw - 10px);
+
+                .user_wrapper {
+                    background: #fff;
+                    ;
+                    border-radius: 10px;
+                    box-shadow: 0 -4px 32px rgba(0, 0, 0, .2);
+                    color: #1d2129;
+                    margin: 0;
+                    overflow: hidden;
+                    transition: all .3s ease-in-out;
+                    will-change: opacity, transform;
+                    min-width: 280px;
+                    padding: 8px 24px !important;
+
+                    .user_list {
+                        margin: 0;
+                        padding-left: 0;
+                        list-style-type: none;
+
+                        .user_item {
+                            color: #666;
+                            cursor: pointer;
+                            display: block;
+                            font-size: 14px;
+                            padding: 10px 0;
+                            outline: none;
+                            text-decoration: none;
+                        }
+                    }
+
+                    hr {
+                        border: none;
+                        border-top: 1px solid rgba(0, 0, 0, .2);
+                        margin: 8px 0;
+                        box-sizing: content-box;
+                        height: 0;
+                        overflow: visible;
+                    }
+
+                    .user_menu {
+                        align-items: center;
+                        display: flex;
+
+                        .avatar_wrapper {
+                            margin: 10px 0;
+                            position: relative;
+
+                            .fallback_avatar {
+                                background: transparent;
+                                border-radius: 50%;
+                                font-size: var(5.6px);
+
+                                img {
+                                    border-radius: 50%;
+                                    height: 45px;
+                                    object-fit: cover;
+                                    width: 45px;
+                                }
+                            }
+                        }
+
+                        .user_info {
+                            margin-left: 12px;
+
+                            span {
+                                color: #292929;
+                                font-size: 16px;
+                                font-weight: 600;
+                            }
+
+                            .user_email {
+                                color: #757575;
+                                font-size: 14px;
+                                line-height: 14px;
+                            }
+                        }
+                    }
+                }
+
+            }
+
             .popup_mycourse {
                 z-index: 9999;
                 position: absolute;
@@ -153,6 +241,7 @@ body {
                     }
                 }
 
+
                 .mycourse_wrapper {
                     animation: Tippy-module_fadeIn__2LeID .3s ease;
                     background: #fff;
@@ -167,6 +256,8 @@ body {
                     min-width: 380px;
                     padding-bottom: 12px;
                     list-style-type: none;
+
+
 
                     .mycourse_header {
                         align-items: center;

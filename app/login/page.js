@@ -9,16 +9,14 @@ import Link from 'next/link';
 import { login } from "../../services/userService"
 
 import { useDispatch, useSelector } from 'react-redux'
-
+import { loginRedux } from '@/redux/actions/updateAction';
+import { toast } from 'react-toastify';
+import { getUserAccount } from '../../services/userService';
 
 export default function Login() {
 
-    const info = useSelector((state) => state.personalInfo)
 
     const dispatch = useDispatch()
-    console.log(info)
-
-
     const router = useRouter()
 
     const [email, setEmail] = useState('')
@@ -27,7 +25,19 @@ export default function Login() {
 
     const [isValid, setIsValid] = useState(true)
 
+    const fetchUser = async () => {
+        let res = await getUserAccount()
+        if (res && res.EC === 0 && res.DT) {
+            router.push('/dashboard')
+        }
+    }
+
     useEffect(() => {
+        // Nếu đã đăng nhập thì tới thẳng dashboard
+
+        fetchUser()
+
+
         const savedEmail = localStorage.getItem('email');
         const savedPassword = localStorage.getItem('password');
         if (savedEmail && savedPassword) {
@@ -64,16 +74,46 @@ export default function Login() {
 
         if (inputValidation()) {
             let res = await login(email, password)
+            if (res) {
+                console.log(res)
 
-            if (res && res.EC === 0) {
-                let data = {
-                    isAuthenticated: true,
-                    token: 'faketoken'
+                if (res.EC === 0) {
+                    let data = {
+                        isAuthenticated: true,
+                        token: res.DT.access_token,
+                        account: {
+                            name: res.DT.name,
+                            address: res.DT.address,
+                            avatar: res.DT.avatar,
+                            email: res.DT.email,
+                            gender: res.DT.gender,
+                            roles: res.DT.roles
+                        }
+                    }
+                    dispatch(loginRedux(data))
+                    localStorage.setItem("jwt", res.DT.access_token)
+                    toast('Đăng nhập thành công')
+
+                    router.push('/dashboard')
+                    saveLoginInfo()
                 }
-                sessionStorage.setItem('account', JSON.stringify(data))
-                router.push('/dashboard')
-                saveLoginInfo()
+                else if (res.EC === 3) {
+                    toast.error('Sai mật khẩu!')
+                }
+                else if (res.EC === 1) {
+                    toast.error('Tài khoản không tồn tài!')
+                }
+                else if (res.EC === 2) {
+                    toast.error('Vui lòng nhập đủ thông tin đăng nhập.')
+                }
+                else if (res.EC === -2) {
+                    toast.error('Lỗi phát sinh từ server')
+                }
+                else if (res.EC === -5) {
+                    toast.error('Không kết nối được với server')
+                }
             }
+
 
         }
 
@@ -81,7 +121,6 @@ export default function Login() {
 
     const saveLoginInfo = () => {
         if (isChecked) {
-            console.log(2)
             // Nếu người dùng chọn "Lưu nhớ mật khẩu", lưu thông tin vào localStorage
             localStorage.setItem('email', email);
             localStorage.setItem('password', password);
@@ -96,6 +135,7 @@ export default function Login() {
 
     return (
         <div>
+
             <Header></Header>
 
             <section className="banner login-registration">

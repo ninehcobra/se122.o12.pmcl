@@ -34,7 +34,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/dashboard/page.js",
-    "app/login/page.js"
+    "app/login/page.js",
+    "app/components/homecomponent/authcheck.tsx"
   ],
   "exclude": [
     "node_modules"

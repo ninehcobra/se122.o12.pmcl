@@ -10,7 +10,7 @@ const instance = axios.create({
 instance.defaults.withCredentials = "true"
 
 // // Alter defaults after instance has been created
-// instance.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+instance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("jwt")}`;
 
 
 // Add a request interceptor
@@ -34,8 +34,10 @@ instance.interceptors.response.use(function (response) {
     switch (status) {
         // authentication (token related issues)
         case 401: {
-            toast.error("Unanthorized the user. Please login")
-            return Promise.reject(err)
+
+            return {
+                err
+            }
         }
 
         // forbidden (permission related issues)

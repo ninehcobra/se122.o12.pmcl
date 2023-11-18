@@ -3,11 +3,12 @@ import Link from 'next/link';
 import '../login/login.scss'
 import Header from '../components/homecomponent/header';
 import Footer from '../components/homecomponent/footer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation'
 import axios from 'axios';
 import { registerNewUser } from "../../services/userService"
 import { toast, ToastContainer } from 'react-toastify';
+import { getUserAccount } from '../../services/userService';
 
 
 export default function Login() {
@@ -21,7 +22,12 @@ export default function Login() {
 
     const [inputFailure, setInputFailure] = useState(0)
 
-
+    const fetchUser = async () => {
+        let res: any = await getUserAccount()
+        if (res && res.EC === 0 && res.DT) {
+            router.push('/dashboard')
+        }
+    }
     const onChangeInput = (value: any, type: any): void => {
 
         if (type === 'email') {
@@ -38,7 +44,7 @@ export default function Login() {
     const inputValidation = () => {
         let emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
         let passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-        let nameRegex = /^[a-zA-Z]+ [a-zA-Z]+$/;
+        let nameRegex = /^[\p{L}']+([\s][\p{L}']+)*$/u;
 
 
         if (email && password && name) {
@@ -71,7 +77,7 @@ export default function Login() {
     const handleRegister = async () => {
         if (inputValidation()) {
             if (isChecked) {
-                let res = await registerNewUser(email, name, password)
+                let res: any = await registerNewUser(email, name, password)
                 if (res.EC === 1) {
                     toast.error('Email này đã được đăng ký❗️')
                 }
@@ -84,6 +90,9 @@ export default function Login() {
                 else if (res.EC === 0) {
                     toast('Đăng ký thành công🥳🥳🥳')
                 }
+                else if (res.EC === -5) {
+                    toast.error('Không kết nối được với server')
+                }
             }
             else {
                 setInputFailure(5)
@@ -91,6 +100,10 @@ export default function Login() {
         }
 
     }
+
+    useEffect(() => {
+        fetchUser()
+    })
 
     return (
         <div>

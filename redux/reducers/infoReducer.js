@@ -1,33 +1,27 @@
+import action from "../actions/actionType"
+
 const initialState = {
     email: '',
     name: '',
     avatar: '',
     address: '',
     gender: '',
-    isAuth: false
+    isAuth: false,
 }
 
 const actionForReducer = (state = initialState, payload) => {
     switch (payload.type) {
-        case 'UPDATE_EMAIL':
+
+        case action.USER_LOGIN_SUCCESS:
+            let data = payload.data.account
             return {
                 ...state,
-                email: payload.email
-            }
-        case 'UPDATE_NAME':
-            return {
-                ...state,
-                name: payload.name
-            }
-        case 'LOGIN':
-            return {
-                ...state,
-                email: payload.email,
-                name: payload.name,
-                avatar: '',
-                address: '',
-                gender: '',
-                isAuth: true
+                email: data.email,
+                name: data.name,
+                avatar: data.avatar,
+                address: data.address,
+                gender: data.gender,
+                isAuth: true,
             }
 
         default:

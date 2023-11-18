@@ -8,10 +8,7 @@ const Blog = () => {
 
     }, []);
 
-    const info = useSelector((state: any) => state.personalInfo)
 
-    const dispatch: any = useDispatch()
-    console.log(info)
 
     return (
         <section className='main_content'>

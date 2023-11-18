@@ -1,23 +1,46 @@
 import axios from '../setup/axios'
 
 const registerNewUser = async (email, name, password) => {
-    let res = axios.post("/api/register", {
-        email, password, name
-    })
-    return res
+    try {
+        let res = await axios.post("/api/register", {
+            email, password, name
+        })
+        return res
+    } catch (error) {
+        return {
+            EC: -5,
+            EM: 'Can not connect to server'
+        }
+    }
 }
 
 const login = async (email, password) => {
-    let res = axios.post("/api/login", {
-        email, password
+    try {
+        let res = await axios.post("/api/login", {
+            email, password
+        }
+        )
+        return res
+    } catch (error) {
+        return {
+            EC: -5,
+            EM: 'Can not connect to server'
+        }
     }
 
 
-    )
+
+
+
+}
+
+const getUserAccount = async () => {
+    let res = axios.get("/api/account")
     return res
 }
 
 export {
     registerNewUser,
-    login
+    login,
+    getUserAccount
 }

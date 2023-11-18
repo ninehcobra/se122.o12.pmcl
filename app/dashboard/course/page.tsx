@@ -8,7 +8,7 @@ const Course = () => {
     const info = useSelector((state: any) => state.personalInfo)
 
     const dispatch: any = useDispatch()
-    console.log(info)
+
 
 
     return (

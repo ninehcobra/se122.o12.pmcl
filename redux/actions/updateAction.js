@@ -1,4 +1,5 @@
 import { toast } from "react-toastify"
+import actionTypes from "./actionType"
 
 export const updateEmail = (email) => async dispatch => {
     try {
@@ -12,7 +13,21 @@ export const updateEmail = (email) => async dispatch => {
             type: 'UPDATE_EMAIL',
             email: email
         })
-        toast('hi')
+
+
+    } catch (error) {
+
+    }
+}
+
+export const loginRedux = (data) => async dispatch => {
+    try {
+
+        dispatch({
+            type: actionTypes.USER_LOGIN_SUCCESS,
+            data
+        })
+
 
     } catch (error) {
 
