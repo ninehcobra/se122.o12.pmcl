@@ -1,18 +1,23 @@
+'use client'
 import { useEffect, useState, useRef } from "react"
 import "./header.scss"
 import Link from "next/link"
 import { useSelector } from 'react-redux';
+import { useRouter } from "next/navigation";
 
-const Header = () => {
+
+const Header = (params: any) => {
     const [myCourse, setMyCourse] = useState(false)
     const [userSetting, setUserSetting] = useState(false)
     const notificationRef = useRef<HTMLDivElement>(null);
     const userSettingRef = useRef<HTMLDivElement>(null)
 
+    const router = useRouter()
+
+
     useEffect(() => {
         const handleOutsideClick = (event: any) => {
-            console.log(userSettingRef)
-            console.log(event.target);
+
             if (
                 notificationRef.current &&
                 !notificationRef.current.contains(event.target) &&
@@ -32,7 +37,7 @@ const Header = () => {
     }, [myCourse])
 
     const info = useSelector((state: any) => state.personalInfo)
-    console.log(info)
+
 
     return (
         <div className="navbar_wrapper">
@@ -40,11 +45,12 @@ const Header = () => {
                 <Link href="/dashboard">
                     <img src="https://raw.githubusercontent.com/ninehcobra/free-host-image/main/News/logo.png" alt="nineh" />
                 </Link>
-                <h4 className="navbar_logo_heading">Nineh Learning</h4>
+                <h4 style={params && params.searchHide ? { display: 'none' } : {}} className="navbar_logo_heading">Nineh Learning</h4>
+                {params && params.searchHide ? <div onClick={() => router.back()} style={{ color: '#808990', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold', marginLeft: '10px' }}>{`<< QUAY LẠI`}</div> : ''}
             </Link>
             <div className="navbar_body">
                 <div>
-                    <div className="search" aria-expanded="false">
+                    <div style={params && params.searchHide ? { display: 'none' } : {}} className="search" aria-expanded="false">
                         <i className="fa-solid fa-magnifying-glass search_icon" ></i>
                         <input className="search_input" placeholder="Tìm kiếm khóa học, bài viết ..." value="" />
                     </div>
@@ -52,7 +58,7 @@ const Header = () => {
             </div>
             <div className="navbar_action">
                 <div>
-                    <button onClick={() => setMyCourse(!myCourse)} className="navbar_mylearn" aria-expanded="false">Khóa học của tôi</button>
+                    <button style={params && params.searchHide ? { display: 'none' } : {}} onClick={() => setMyCourse(!myCourse)} className="navbar_mylearn" aria-expanded="false">Khóa học của tôi</button>
                     {myCourse ?
                         <div className="popup_mycourse" >
                             <ul className="mycourse_wrapper">
@@ -183,7 +189,7 @@ const Header = () => {
                 <div onClick={() => {
 
                     setUserSetting(!userSetting)
-                    console.log(userSetting)
+
                 }} className="navbar_avatar_wrapper" ref={userSettingRef} aria-expanded="false">
                     <div className="fallback_avatar" >
                         <img className="navbar_avatar"

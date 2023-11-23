@@ -75,7 +75,7 @@ export default function Login() {
         if (inputValidation()) {
             let res = await login(email, password)
             if (res) {
-                console.log(res)
+
 
                 if (res.EC === 0) {
                     let data = {

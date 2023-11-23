@@ -35,7 +35,9 @@
     ".next/types/**/*.ts",
     "app/dashboard/page.js",
     "app/login/page.js",
-    "app/components/homecomponent/authcheck.tsx"
+    "app/components/homecomponent/authcheck.tsx",
+    "app/dashboard/blog/page.js",
+    "app/create-blog/page.js"
   ],
   "exclude": [
     "node_modules"

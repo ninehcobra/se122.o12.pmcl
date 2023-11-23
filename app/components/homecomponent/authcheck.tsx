@@ -51,7 +51,7 @@ export const AuthCheck = ({
 
         if (nonSecurePaths.includes(path)) { }
         else {
-            console.log(info)
+
             fetchUser()
 
         }

@@ -52,8 +52,41 @@
                             display: flex;
                             font-size: 1.4rem;
                             justify-content: center;
-                            margin-top: 20px;
-                            position: relative;
+
+                            // color react-pagination
+                            .page-link {
+                                color: #242424 !important;
+                                border: none !important;
+                                margin: 6px;
+
+                                &:focus {
+                                    border: none;
+                                    outline: none;
+                                }
+                            }
+
+                            .active {
+                                border: none !important;
+
+                                a {
+                                    color: white !important;
+                                    background-color: #f47425 !important;
+                                    border: none !important;
+
+                                    &:focus {
+                                        border: none;
+                                        outline: none;
+                                    }
+                                }
+
+                                &:focus {
+                                    border: none;
+                                    outline: none;
+                                }
+                            }
+
+
+
 
                             .pagination_pages {
                                 align-items: center;
