@@ -20,7 +20,6 @@ import Footer from './components/homecomponent/footer'
 function Home() {
 
 
-
   return (
 
 
@@ -42,6 +41,9 @@ function Home() {
 
 
   )
+
+
+
 }
 
 export default (Home)

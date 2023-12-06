@@ -12,6 +12,19 @@ const getBlog = async (page, limit) => {
     }
 }
 
+const createBlog = async (data) => {
+    try {
+        let res = await axios.post(`/api/create-blog`, data)
+        return res
+    } catch (error) {
+        return {
+            EC: -5,
+            EM: error
+        }
+    }
+}
+
 export {
-    getBlog
+    getBlog,
+    createBlog
 }

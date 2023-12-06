@@ -4,7 +4,7 @@ import "./header.scss"
 import Link from "next/link"
 import { useSelector } from 'react-redux';
 import { useRouter } from "next/navigation";
-
+import { logout } from "@/services/userService";
 
 const Header = (params: any) => {
     const [myCourse, setMyCourse] = useState(false)
@@ -13,6 +13,7 @@ const Header = (params: any) => {
     const userSettingRef = useRef<HTMLDivElement>(null)
 
     const router = useRouter()
+
 
 
     useEffect(() => {
@@ -37,6 +38,13 @@ const Header = (params: any) => {
     }, [myCourse])
 
     const info = useSelector((state: any) => state.personalInfo)
+
+    const handleLogOut = async () => {
+        localStorage.removeItem('jwt')
+        let res = await logout()
+
+        router.push('/login')
+    }
 
 
     return (
@@ -233,7 +241,7 @@ const Header = (params: any) => {
                                 <hr />
                                 <ul className="user_list">
                                     <li>
-                                        <a className="user_item" href={`/dashboard/user/${info.name}`}>Đăng xuất</a>
+                                        <div onClick={handleLogOut} className="user_item" >Đăng xuất</div>
                                     </li>
                                 </ul>
                             </ul>

@@ -28,19 +28,28 @@ const login = async (email, password) => {
         }
     }
 
+}
 
-
-
-
+const logout = async (email, password) => {
+    try {
+        let res = await axios.post("/api/logout")
+        return res
+    } catch (error) {
+        return {
+            EC: -5,
+            EM: 'Can not connect to server'
+        }
+    }
 }
 
 const getUserAccount = async () => {
-    let res = axios.get("/api/account")
+    let res = await axios.get("/api/account")
     return res
 }
 
 export {
     registerNewUser,
     login,
-    getUserAccount
+    getUserAccount,
+    logout
 }
