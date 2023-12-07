@@ -39,6 +39,7 @@ const Header = (params: any) => {
 
     const info = useSelector((state: any) => state.personalInfo)
 
+
     const handleLogOut = async () => {
         localStorage.removeItem('jwt')
         let res = await logout()
@@ -224,13 +225,13 @@ const Header = (params: any) => {
                                 <hr />
                                 <ul className="user_list">
                                     <li>
-                                        <Link className="user_item" href={`/user/${info.name}`}>Trang cá nhân</Link>
+                                        <Link className="user_item" href={`/myaccount`}>Trang cá nhân</Link>
                                     </li>
                                 </ul>
                                 <hr />
                                 <ul className="user_list">
                                     <li>
-                                        <a className="user_item" href={`/dashboard/user/${info.name}`}>Viết blog</a>
+                                        <Link className="user_item" href={`/create-blog`}>Viết blog</Link>
                                     </li>
                                 </ul>
                                 <ul className="user_list">

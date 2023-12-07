@@ -1,3 +1,4 @@
+'use client'
 import "./blog.scss"
 
 const Blog = () => {

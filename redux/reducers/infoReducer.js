@@ -1,6 +1,7 @@
 import action from "../actions/actionType"
 
 const initialState = {
+    id: '',
     email: '',
     name: '',
     avatar: '',
@@ -22,6 +23,7 @@ const actionForReducer = (state = initialState, payload) => {
                 address: data.address,
                 gender: data.gender,
                 isAuth: true,
+                id: data.id
             }
 
         default:

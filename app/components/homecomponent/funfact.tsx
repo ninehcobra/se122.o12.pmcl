@@ -1,3 +1,4 @@
+'use client'
 import "./funfact.scss"
 const FunFact = () => {
     return (

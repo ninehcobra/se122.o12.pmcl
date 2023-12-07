@@ -1,6 +1,5 @@
-
+'use client'
 import Link from 'next/link'
-
 import './globals.scss'
 
 export default async function NotFound() {
@@ -34,7 +33,7 @@ export default async function NotFound() {
                             thay vì dùng URL đã lưu.</li>
                     </ul>
                     <p>
-                        <a className="notfound_home_btn" href="/">Truy cập trang chủ</a>
+                        <a className="notfound_home_btn" href="/dashboard">Truy cập trang chủ</a>
                     </p>
                     <p>👉 hoặc đi tới
                         <a className="notfound_mycourse_btn" href="/my-courses">Khóa học của tôi</a>

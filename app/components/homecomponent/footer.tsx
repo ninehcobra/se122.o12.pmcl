@@ -1,3 +1,4 @@
+'use client'
 import "./footer.scss"
 
 const Footer = () => {

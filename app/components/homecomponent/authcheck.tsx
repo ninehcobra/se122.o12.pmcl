@@ -25,6 +25,7 @@ export const AuthCheck = ({
     const fetchUser = async () => {
         let res: any = await getUserAccount()
         if (res && res.EC === 0 && res.DT) {
+
             let data = {
                 isAuthenticated: true,
                 token: res.DT.access_token,
@@ -34,7 +35,8 @@ export const AuthCheck = ({
                     avatar: res.DT.avatar,
                     email: res.DT.email,
                     gender: res.DT.gender,
-                    roles: res.DT.roles
+                    roles: res.DT.roles,
+                    id: res.DT.id
                 }
             }
             await dispatch(loginRedux(data))

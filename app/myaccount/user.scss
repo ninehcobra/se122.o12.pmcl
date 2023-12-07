@@ -1,0 +1,57 @@
+.profile-banner {
+    background-image: url("https://github.com/ninehcobra/free-host-image/blob/main/banner.png?raw=true");
+    // background: top/cover no-repeat;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    margin-top: -66px;
+    padding-top: 28%;
+    min-height: 200px;
+    position: relative;
+
+    .profile-user {
+        align-items: flex-end;
+        bottom: -70px;
+        display: flex;
+        left: 40px;
+        position: absolute;
+        z-index: 1;
+
+        .profile-avatar {
+            align-items: center;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            height: 172px;
+            justify-content: center;
+            width: 172px;
+
+            .fallback-avatar {
+                border-radius: 50%;
+                font-size: 17.2px;
+
+                img {
+                    border-radius: 50%;
+                    height: 9em;
+                    object-fit: cover;
+                    width: 9em;
+                }
+            }
+        }
+
+        .profile-user-name {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 32px;
+            margin-left: 16px;
+            text-align: center;
+            color: black;
+        }
+    }
+
+
+}
+
+.profile-container {
+    margin-top: 90px;
+    padding: 0 24px;
+}

@@ -12,6 +12,8 @@ import { useDropzone } from 'react-dropzone'
 import { AuthCheck } from '../components/homecomponent/authcheck';
 import { Button } from 'react-bootstrap';
 import { toast } from "react-toastify"
+import { createBlog } from '@/services/blogService';
+
 
 
 
@@ -23,6 +25,7 @@ const Course = () => {
     const [content, setContent] = useState({ contentHTML: '', contentMarkdown: '' })
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
+    const [isCreate, setIsCreate] = useState(false)
 
 
     const fileInputRef = useRef(null);
@@ -104,6 +107,7 @@ const Course = () => {
     }
 
     const handleCreateBlog = async () => {
+        setIsCreate(true)
         if (title && description && content.contentHTML && content.contentMarkdown) {
             let imgThumb = null
             console.log('go')
@@ -117,10 +121,30 @@ const Course = () => {
                 thumbnail: imgThumb ? imgThumb : '',
                 content: content
             }
-            console.log(data)
+            let res = await createBlog(data)
+            if (res.EC === 0) {
+                toast("Đăng blog thành công")
+                setIsCreate(false)
+                setThumbnail(null)
+                setTitle('')
+                setDescription('')
+                setContent(
+                    { contentHTML: '', contentMarkdown: '' }
+                )
+            }
+            else if (res.EC === -1) {
+                toast.error("Lỗi phát sinh từ server.")
+            }
+            else if (res.EC === -2) {
+                toast.error("Lỗi phát sinh từ client.")
+            }
+            else {
+                toast.error("Lỗi không xác định.")
+            }
         }
         else {
             toast.error('Vui lòng nhập đầy đủ thông tin')
+            setIsCreate(false)
         }
     }
 
@@ -136,7 +160,7 @@ const Course = () => {
                         <div style={{ width: '15%' }}></div>
                         <div style={{ width: '20%', display: 'flex', alignItems: 'center', justifyContent: "flex-end" }}>
 
-                            <button onClick={handleCreateBlog} style={{ fontWeight: 'bold', width: '150px', borderRadius: '12px', color: 'white', backgroundColor: '#ef470d', border: 'none', height: '35px' }} >Xuất bản</button>
+                            <button disabled={isCreate} onClick={handleCreateBlog} className={isCreate ? 'iscreate-btn' : 'create-btn'}  >{isCreate ? "Đang xuất bản..." : 'Xuất bản'}</button>
                         </div>
                     </div>
 
@@ -189,7 +213,7 @@ const Course = () => {
                         }
                     </div>
                     <div style={{ color: 'black', fontWeight: 'bold', fontSize: '14px' }}>NỘI DUNG</div>
-                    <MdEditor onImageUpload={addImgToBlog} placeholder='Nội dung viết ở đây' style={{ height: '100vh' }} renderHTML={text => mdParser.render(text)} onChange={handleEditorChange} />
+                    <MdEditor value={content.contentMarkdown} onImageUpload={addImgToBlog} placeholder='Nội dung viết ở đây' style={{ height: '100vh' }} renderHTML={text => mdParser.render(text)} onChange={handleEditorChange} />
                 </div>
             </AuthCheck>
 

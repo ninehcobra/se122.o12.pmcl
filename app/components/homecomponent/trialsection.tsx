@@ -1,3 +1,4 @@
+'use client'
 import "./trialsection.scss"
 
 const TrialSection = () => {

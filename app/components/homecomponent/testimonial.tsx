@@ -1,3 +1,4 @@
+'use client'
 import "./testimonial.scss"
 
 const Testimonial = () => {

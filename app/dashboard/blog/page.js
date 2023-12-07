@@ -26,7 +26,7 @@ const Blog = () => {
         }
     }
 
-    const calDay = (time) => {
+    const calTime = (time) => {
         var thoiDiem = new Date(time);
 
         // Lấy thời điểm hiện tại
@@ -35,10 +35,30 @@ const Blog = () => {
         // Tính số mili giây giữa hai thời điểm
         var soMiligiay = thoiDiemHienTai - thoiDiem;
 
-        // Chuyển đổi mili giây thành số ngày
-        var soNgay = Math.floor(soMiligiay / (1000 * 60 * 60 * 24));
+        // Chuyển đổi mili giây thành số giây
+        var soGiay = Math.floor(soMiligiay / 1000);
 
-        return soNgay;
+        if (soGiay >= 60) {
+            // Chuyển đổi số giây thành số phút
+            var soPhut = Math.floor(soGiay / 60);
+
+            if (soPhut >= 60) {
+                // Chuyển đổi số phút thành số giờ
+                var soGio = Math.floor(soPhut / 60);
+
+                if (soGio >= 24) {
+                    // Chuyển đổi số giờ thành số ngày
+                    var soNgay = Math.floor(soGio / 24);
+                    return soNgay + ' ngày trước';
+                } else {
+                    return soGio + ' giờ trước';
+                }
+            } else {
+                return soPhut + ' phút trước';
+            }
+        } else {
+            return soGiay + ' giây trước';
+        }
     }
 
     useEffect(() => {
@@ -56,7 +76,7 @@ const Blog = () => {
                 <div className="layout_container_top">
                     <h1 className="layout_heading">Bài viết nổi bật</h1>
                     <div className="layout_desc" >
-                        <p>Tổng hợp các bài viết chia sẻ về kinh nghiệm tự học lập trình online và các kỹ thuật lập trình web.</p>
+                        <p>Tổng hợp các bài viết chia sẻ về kinh nghiệm tự học cùng các lĩnh vực khác.</p>
                     </div>
                 </div>
 
@@ -94,7 +114,7 @@ const Blog = () => {
 
                                                         <div className="post_item_body">
                                                             <div className="post_item_info">
-                                                                <Link href={`/dashboard/blog/${item.id}`}>
+                                                                <Link href={`/blog/${item.id}`}>
                                                                     <h2 className="post_item_title">{item.title}</h2>
                                                                 </Link>
                                                                 <p className="post_item_desc">
@@ -102,12 +122,12 @@ const Blog = () => {
                                                                 </p>
                                                                 <div className="post_item_info">
                                                                     <Link href="" className="post_item_tag">ReactJS</Link>
-                                                                    <span>{calDay(item.createdAt)} ngày trước</span>
+                                                                    <span>{calTime(item.createdAt)}</span>
 
                                                                 </div>
                                                             </div>
                                                             <div className="post_item_thumb">
-                                                                <Link href={`/dashboard/blog/${item.id}`}>
+                                                                <Link href={`/blog/${item.id}`}>
                                                                     <img src={item.thumbnail} alt={item.title} />
                                                                 </Link>
                                                             </div>
@@ -170,11 +190,11 @@ const Blog = () => {
                             </div>
                             <div className="banner_wrapper">
                                 <div className="banner_content">
-                                    <a href="https://fullstack.edu.vn/landing/htmlcss" target="_blank" rel="noreferrer">
-                                        <img src="https://files.fullstack.edu.vn/f8-prod/banners/25/63dc61d4caec2.png" alt="HTML CSS Pro Banner" title="HTML CSS Pro Banner" />
+                                    <a href="https://www.facebook.com/profile.php?id=100089771191514" target="_blank" rel="noreferrer">
+                                        <img src="https://raw.githubusercontent.com/ninehcobra/free-host-image/main/facebook.png" alt="HTML CSS Pro Banner" title="HTML CSS Pro Banner" />
                                     </a>
-                                    <a href="https://www.youtube.com/c/F8VNOfficial" target="_blank" rel="noreferrer">
-                                        <img src="https://files.fullstack.edu.vn/f8-prod/banners/32/6421144f7b504.png" alt="F8 Youtube Banner" title="F8 Youtube Banner" />
+                                    <a href="https://discord.gg/MzD3zQ8GJa" target="_blank" rel="noreferrer">
+                                        <img src="https://raw.githubusercontent.com/ninehcobra/free-host-image/main/discord.png" alt="F8 Youtube Banner" title="F8 Youtube Banner" />
                                     </a>
                                 </div>
                             </div>

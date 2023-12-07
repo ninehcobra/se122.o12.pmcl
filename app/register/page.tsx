@@ -89,6 +89,7 @@ export default function Login() {
                 }
                 else if (res.EC === 0) {
                     toast('Đăng ký thành công🥳🥳🥳')
+                    router.push("/login")
                 }
                 else if (res.EC === -5) {
                     toast.error('Không kết nối được với server')
@@ -103,7 +104,7 @@ export default function Login() {
 
     useEffect(() => {
         fetchUser()
-    })
+    }, [])
 
     return (
         <div>

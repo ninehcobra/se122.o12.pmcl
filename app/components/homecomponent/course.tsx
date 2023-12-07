@@ -1,3 +1,4 @@
+
 "use client"
 import "./course.scss"
 import Slider from "react-slick";
