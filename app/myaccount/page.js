@@ -27,7 +27,21 @@ const User = () => {
                         </div>
                     </div>
                     <div className="profile-container">
-                        hi
+                        <section className="left-content-container">
+                            <div className="left-content">
+                                <div className="box-wrapper">
+                                    <h4>Giới thiệu</h4>
+                                    <div>
+                                        <div className="profile-participation">
+                                            <div className="profile-participation-icon">
+
+                                            </div>
+                                            <span>Thành viên</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                     </div>
                 </div>
             </AuthCheck>

@@ -41,10 +41,13 @@ const Header = (params: any) => {
 
 
     const handleLogOut = async () => {
-        localStorage.removeItem('jwt')
-        let res = await logout()
 
-        router.push('/login')
+        let res: any = await logout()
+        if (res.EC === 0) {
+            await localStorage.removeItem('jwt')
+            window.location.href = '/login'
+        }
+
     }
 
 

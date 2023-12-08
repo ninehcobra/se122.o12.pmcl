@@ -8,6 +8,7 @@ const initialState = {
     address: '',
     gender: '',
     isAuth: false,
+    createdAt: ''
 }
 
 const actionForReducer = (state = initialState, payload) => {
@@ -23,7 +24,8 @@ const actionForReducer = (state = initialState, payload) => {
                 address: data.address,
                 gender: data.gender,
                 isAuth: true,
-                id: data.id
+                id: data.id,
+                createdAt: data.createdAt
             }
 
         default:
