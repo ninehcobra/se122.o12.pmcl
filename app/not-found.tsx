@@ -1,8 +1,8 @@
-'use client'
+
 import Link from 'next/link'
 import './globals.scss'
 
-export default async function NotFound() {
+export default function NotFound() {
 
 
     return (

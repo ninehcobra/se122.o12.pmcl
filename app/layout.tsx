@@ -9,6 +9,7 @@ import Footer from './components/homecomponent/footer';
 import { usePathname } from 'next/navigation';
 import { ReduxProvider } from "./components/homecomponent/reduxprovider"
 import ScrollToTopButton from "./components/homecomponent/scrolltotop"
+import Head from 'next/head';
 
 
 export default function RootLayout({
@@ -26,6 +27,7 @@ export default function RootLayout({
         {/* <script type="text/javascript" src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js"></script> */}
       </head>
       <body>
+
         <ScrollToTopButton />
         <ReduxProvider>
 

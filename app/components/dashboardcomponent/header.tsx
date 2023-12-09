@@ -11,6 +11,7 @@ const Header = (params: any) => {
     const [userSetting, setUserSetting] = useState(false)
     const notificationRef = useRef<HTMLDivElement>(null);
     const userSettingRef = useRef<HTMLDivElement>(null)
+    const [search, setSearch] = useState('')
 
     const router = useRouter()
 
@@ -50,6 +51,10 @@ const Header = (params: any) => {
 
     }
 
+    const handleOnchange = (text: string) => {
+        setSearch(text)
+    }
+
 
     return (
         <div className="navbar_wrapper">
@@ -64,7 +69,7 @@ const Header = (params: any) => {
                 <div>
                     <div style={params && params.searchHide ? { display: 'none' } : {}} className="search" aria-expanded="false">
                         <i className="fa-solid fa-magnifying-glass search_icon" ></i>
-                        <input className="search_input" placeholder="Tìm kiếm khóa học, bài viết ..." value="" />
+                        <input onChange={(e) => handleOnchange(e.target.value)} className="search_input" placeholder="Tìm kiếm khóa học, bài viết ..." value={search} />
                     </div>
                 </div>
             </div>
@@ -229,6 +234,9 @@ const Header = (params: any) => {
                                 <ul className="user_list">
                                     <li>
                                         <Link className="user_item" href={`/myaccount`}>Trang cá nhân</Link>
+                                    </li>
+                                    <li>
+                                        {params.teacherMode ? "" : <Link className="user_item" href={`/teacher/courses`}>Quản lý khóa học (Giảng viên)</Link>}
                                     </li>
                                 </ul>
                                 <hr />
