@@ -7,7 +7,7 @@ import { useSelector } from "react-redux"
 
 const User = () => {
     const info = useSelector((state) => state.personalInfo)
-    console.log(info)
+
     return (
 
         <div>

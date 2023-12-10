@@ -25,8 +25,6 @@ export const AuthCheck = ({
     const fetchUser = async () => {
         let res: any = await getUserAccount()
         if (res && res.EC === 0 && res.DT) {
-            console.log(res.DT)
-
             let data = {
                 isAuthenticated: true,
                 token: res.DT.access_token,

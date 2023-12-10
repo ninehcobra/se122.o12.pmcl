@@ -1,8 +1,19 @@
 .course-wrapper {
     display: flex;
+    flex-wrap: wrap;
+
+    @media screen and (min-width: 768px) {
+
+        .left-content,
+        .right-content {
+            width: 50% !important;
+        }
+    }
 
     .left-content {
-        width: 50%;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 15px;
 
 
         .create-course-process {
@@ -75,7 +86,28 @@
                 flex-direction: column;
                 margin-top: 12px;
 
+                select {
+                    outline: none;
+                    border: 2px solid rgba(128, 128, 128, 0.1);
+                    padding: 8px 12px;
+                    width: 240px;
+                    border-radius: 5px;
+                    margin-bottom: 14px;
+                }
+
                 input {
+                    margin-bottom: 18px;
+                    border: none;
+                    padding: 4px 12px;
+                    outline: none;
+                    border-radius: 4px;
+
+                    &::placeholder {
+                        font-weight: bold;
+                    }
+                }
+
+                textarea {
                     margin-bottom: 18px;
                     border: none;
                     padding: 4px 12px;

@@ -6,34 +6,33 @@ import { useState } from "react"
 import { toast } from "react-toastify"
 
 
-const TitleForm = (params) => {
+const DescriptionForm = (params) => {
 
     let course = params.course
     let changeCompletionText = params.changeCompletionText
 
     const [isEditing, setIsEditing] = useState(false)
-    const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('')
     const [isSubmit, setIsSubmit] = useState(true)
 
     const router = useRouter()
 
 
-    const handleSaveTitle = async () => {
-        if (title) {
-            course.title = title
-            console.log(course)
+    const handleSaveDescription = async () => {
+        if (description) {
+            course.description = description
             let res = await updateCourse(course)
             if (res && res.EC === 0) {
                 changeCompletionText(course)
                 toast('Lưu thành công')
-                setTitle('')
+                setDescription('')
                 setIsEditing(false)
                 setIsSubmit(false)
                 router.refresh()
             }
         }
         else {
-            toast.warning('Vui lòng điền tiêu đề')
+            toast.warning('Vui lòng điền mô tả')
         }
     }
 
@@ -43,13 +42,13 @@ const TitleForm = (params) => {
         <div className="title-form">
             <div className="title-form-label">
                 <div >
-                    Tiêu đề khóa học
+                    Mô tả khóa học
                 </div>
                 {!isEditing
                     ?
                     <div className="edit-btn" onClick={() => setIsEditing(true)} style={{ display: 'flex', alignItems: 'center' }}>
                         <i class="fa-solid fa-pencil"></i>
-                        <div style={{ marginLeft: '12px' }}>Sửa tiêu đề</div>
+                        <div style={{ marginLeft: '12px' }}>Sửa mô tả</div>
                     </div>
                     :
 
@@ -62,15 +61,15 @@ const TitleForm = (params) => {
 
             {isEditing ?
                 <div className="title-form-wrapper">
-                    <input onChange={(e) => setTitle(e.target.value)} value={title} placeholder="Tiêu đề mới" />
+                    <textarea onChange={(e) => setDescription(e.target.value)} value={description} placeholder="Mô tả mới" />
 
-                    {isSubmit ? <button onClick={handleSaveTitle}>Lưu</button> : <button disabled>Đang lưu...</button>}
+                    {isSubmit ? <button onClick={handleSaveDescription}>Lưu</button> : <button disabled>Đang lưu...</button>}
 
-                </div> : <div>{course.title}</div>
+                </div> : course.description ? <div>{course.description}</div> : <div style={{ fontStyle: 'italic' }}>Không có mô tả</div>
             }
 
         </div>
     )
 }
 
-export default TitleForm
+export default DescriptionForm
