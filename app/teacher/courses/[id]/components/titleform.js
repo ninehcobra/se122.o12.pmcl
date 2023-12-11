@@ -13,7 +13,7 @@ const TitleForm = (params) => {
 
     const [isEditing, setIsEditing] = useState(false)
     const [title, setTitle] = useState('')
-    const [isSubmit, setIsSubmit] = useState(true)
+    const [isSubmit, setIsSubmit] = useState(false)
 
     const router = useRouter()
 
@@ -64,7 +64,7 @@ const TitleForm = (params) => {
                 <div className="title-form-wrapper">
                     <input onChange={(e) => setTitle(e.target.value)} value={title} placeholder="Tiêu đề mới" />
 
-                    {isSubmit ? <button onClick={handleSaveTitle}>Lưu</button> : <button disabled>Đang lưu...</button>}
+                    {!isSubmit ? <button onClick={handleSaveTitle}>Lưu</button> : <button disabled>Đang lưu...</button>}
 
                 </div> : <div>{course.title}</div>
             }

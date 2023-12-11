@@ -8,6 +8,7 @@ import ThumbnailForm from "./components/thumbnailform"
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import CategoryForm from "./components/categoryform"
+import PriceForm from "./components/priceform"
 
 
 const Courses = ({ params }) => {
@@ -56,28 +57,52 @@ const Courses = ({ params }) => {
 
     return (
         course ?
-            <div className="course-wrapper">
-                <div className="left-content">
-                    <div className="create-course-process">
-                        <div className="title">Thiết lập khóa học</div>
-                        <div className="process">Tiến độ thiết lập {completionText}</div>
-                    </div>
-
-                    <div className="customize-wrapper">
-                        <div className="customize-icon">
-                            <img src="https://raw.githubusercontent.com/ninehcobra/free-host-image/main/customize.png"></img>
-                        </div>
-                        <div className="customize-title">
-                            Tùy chỉnh khóa học của bạn
-                        </div>
-                    </div>
-
-                    <TitleForm course={course} changeCompletionText={changeCompletionText} />
-                    <DescriptionForm course={course} changeCompletionText={changeCompletionText} />
-                    <ThumbnailForm course={course} changeCompletionText={changeCompletionText} />
-                    <CategoryForm course={course} changeCompletionText={changeCompletionText} />
+            <div>
+                <div className="create-course-process">
+                    <div className="title">Thiết lập khóa học</div>
+                    <div className="process">Tiến độ thiết lập {completionText}</div>
                 </div>
-                <div className="right-content">
+                <div className="course-wrapper">
+                    <div className="left-content">
+
+
+                        <div className="customize-wrapper">
+                            <div className="customize-icon">
+                                <img src="https://raw.githubusercontent.com/ninehcobra/free-host-image/main/customize.png"></img>
+                            </div>
+                            <div className="customize-title">
+                                Tùy chỉnh khóa học của bạn
+                            </div>
+                        </div>
+
+                        <TitleForm course={course} changeCompletionText={changeCompletionText} />
+                        <DescriptionForm course={course} changeCompletionText={changeCompletionText} />
+                        <ThumbnailForm course={course} changeCompletionText={changeCompletionText} />
+                        <CategoryForm course={course} changeCompletionText={changeCompletionText} />
+                    </div>
+                    <div className="right-content">
+                        <div className="customize-wrapper">
+                            <div className="customize-icon">
+                                <img src="https://raw.githubusercontent.com/ninehcobra/free-host-image/main/checklist.png"></img>
+                            </div>
+                            <div className="customize-title">
+                                Chương học
+                            </div>
+                        </div>
+
+                        <div>TODO:chapter</div>
+
+                        <div className="customize-wrapper">
+                            <div className="customize-icon">
+                                <img src="https://raw.githubusercontent.com/ninehcobra/free-host-image/main/dollar.png"></img>
+                            </div>
+                            <div className="customize-title">
+                                Bán khóa học
+                            </div>
+                        </div>
+                        <PriceForm course={course} changeCompletionText={changeCompletionText} />
+
+                    </div>
                 </div>
             </div>
             : ''
