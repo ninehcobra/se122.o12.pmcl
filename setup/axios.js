@@ -37,7 +37,6 @@ instance.interceptors.response.use(function (response) {
     switch (status) {
         // authentication (token related issues)
         case 401: {
-
             return {
                 err
             }

@@ -1,35 +1,31 @@
 'use client'
 
-import { getCourse } from "@/services/courseService"
-import './coursedetail.scss'
-import TitleForm from "./components/titleform"
-import DescriptionForm from "./components/descriptionform"
-import ThumbnailForm from "./components/thumbnailform"
+import { getChapter } from "@/services/courseService"
+import './chapter.scss'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import CategoryForm from "./components/categoryform"
-import PriceForm from "./components/priceform"
-import ChapterForm from "./components/chapterform"
+import TitleForm from "../components/titleform"
 
 
-const Courses = ({ params }) => {
-    const [course, setCourse] = useState()
+
+const Chapter = ({ params }) => {
+    const [chapter, setChapter] = useState()
     const [completionText, setCompletionText] = useState('')
     const [reFetch, setReFetch] = useState(false)
 
     const router = useRouter()
 
-    const fetchCourse = async () => {
+    const fetchChapter = async () => {
 
-        let res = await getCourse(params.id);
+        let res = await getChapter(params.id);
 
         if (res && res.EC === 0) {
-            setCourse(res.DT);
+            setChapter(res.DT);
             changeCompletionText(res.DT)
         } else {
             return router.push('/teacher/courses');
         }
-
+        console.log(res.DT)
     }
 
     const changeCompletionText = (data, refresh = false) => {
@@ -40,10 +36,7 @@ const Courses = ({ params }) => {
             const requiredFields = [
                 data.title,
                 data.description,
-                data.thumbnail,
-                data.newPrice,
-                data.categoryId,
-                data.Chapters && Array.isArray(data.Chapters) ? data.Chapters.some(chapter => chapter.isPublished) : false
+                data.videoUrl,
             ];
 
             const totalFields = requiredFields.length;
@@ -54,7 +47,7 @@ const Courses = ({ params }) => {
     }
 
     useEffect(() => {
-        fetchCourse()
+        fetchChapter()
 
     }, [reFetch])
 
@@ -64,10 +57,14 @@ const Courses = ({ params }) => {
 
 
     return (
-        course ?
+        chapter ?
             <div>
+                {/* <div className="back-btn" style={{ display: 'flex', alignItems: 'center', color: 'black', fontSize: '18px', marginTop: '16px' }}>
+                    <i className="fa-solid fa-arrow-left"></i>
+                    <div style={{ marginLeft: '8px' }}>Quay về cài đặt khóa học</div>
+                </div> */}
                 <div className="create-course-process">
-                    <div className="title">Thiết lập khóa học</div>
+                    <div className="title">Thiết lập Chương học</div>
                     <div className="process">Tiến độ thiết lập {completionText}</div>
                 </div>
                 <div className="course-wrapper">
@@ -79,14 +76,12 @@ const Courses = ({ params }) => {
                                 <img src="https://raw.githubusercontent.com/ninehcobra/free-host-image/main/customize.png"></img>
                             </div>
                             <div className="customize-title">
-                                Tùy chỉnh khóa học của bạn
+                                Tùy chỉnh Chương học của bạn
                             </div>
                         </div>
 
-                        <TitleForm course={course} changeCompletionText={changeCompletionText} />
-                        <DescriptionForm course={course} changeCompletionText={changeCompletionText} />
-                        <ThumbnailForm course={course} changeCompletionText={changeCompletionText} />
-                        <CategoryForm course={course} changeCompletionText={changeCompletionText} />
+                        <TitleForm chapter={chapter} changeCompletionText={changeCompletionText} />
+
                     </div>
                     <div className="right-content">
                         <div className="customize-wrapper">
@@ -98,7 +93,7 @@ const Courses = ({ params }) => {
                             </div>
                         </div>
 
-                        <ChapterForm course={course} changeCompletionText={changeCompletionText} />
+
 
                         <div className="customize-wrapper">
                             <div className="customize-icon">
@@ -108,7 +103,7 @@ const Courses = ({ params }) => {
                                 Bán khóa học
                             </div>
                         </div>
-                        <PriceForm course={course} changeCompletionText={changeCompletionText} />
+
 
                     </div>
                 </div>
@@ -117,4 +112,4 @@ const Courses = ({ params }) => {
     )
 }
 
-export default Courses
+export default Chapter

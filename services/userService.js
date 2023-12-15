@@ -43,8 +43,17 @@ const logout = async (email, password) => {
 }
 
 const getUserAccount = async () => {
-    let res = await axios.get("/api/account")
-    return res
+    try {
+        let res = await axios.get("/api/account")
+        return res
+    }
+    catch (error) {
+        return {
+            EC: -5,
+            EM: 'Can not connect to server'
+        }
+    }
+
 }
 
 export {

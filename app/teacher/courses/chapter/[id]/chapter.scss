@@ -1,3 +1,11 @@
+.back-btn {
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.4;
+    }
+}
+
 .create-course-process {
     margin-top: 20px;
 
