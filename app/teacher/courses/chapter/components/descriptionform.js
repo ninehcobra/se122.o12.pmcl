@@ -1,32 +1,29 @@
 'use client'
-
-import { updateChapter } from "@/services/courseService"
-import { useRouter } from "next/navigation"
-import { useState } from "react"
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import { useState } from 'react';
+import { updateChapter } from '@/services/courseService';
 import { toast } from "react-toastify"
+import { useRouter } from 'next/navigation';
 
-
-const TitleForm = (params) => {
+const DescriptionForm = (params) => {
+    const router = useRouter()
 
     let chapter = params.chapter
     let changeCompletionText = params.changeCompletionText
 
+    const [description, setDescription] = useState(chapter && chapter.description ? chapter.description : '');
     const [isEditing, setIsEditing] = useState(false)
-    const [title, setTitle] = useState('')
     const [isSubmit, setIsSubmit] = useState(false)
 
-    const router = useRouter()
-
-
-    const handleSaveTitle = async () => {
-        if (title) {
-            chapter.title = title
+    const handleSaveDescription = async () => {
+        if (description) {
+            chapter.description = description
             console.log(chapter)
             let res = await updateChapter(chapter)
             if (res && res.EC === 0) {
                 changeCompletionText(chapter)
                 toast('Lưu thành công')
-                setTitle('')
                 setIsEditing(false)
                 setIsSubmit(false)
                 router.refresh()
@@ -38,18 +35,17 @@ const TitleForm = (params) => {
     }
 
 
-
     return (
         <div className="title-form">
             <div className="title-form-label">
                 <div >
-                    Tiêu đề Chương học
+                    Mô tả Chương học
                 </div>
                 {!isEditing
                     ?
                     <div className="edit-btn" onClick={() => setIsEditing(true)} style={{ display: 'flex', alignItems: 'center' }}>
                         <i class="fa-solid fa-pencil"></i>
-                        <div style={{ marginLeft: '12px' }}>Sửa tiêu đề</div>
+                        <div style={{ marginLeft: '12px' }}>Sửa mô tả</div>
                     </div>
                     :
 
@@ -62,15 +58,17 @@ const TitleForm = (params) => {
 
             {isEditing ?
                 <div className="title-form-wrapper">
-                    <input onChange={(e) => setTitle(e.target.value)} value={title} placeholder="Tiêu đề mới" />
+                    <ReactQuill style={{ marginBottom: '12px', backgroundColor: 'white' }} theme="snow" value={description} onChange={setDescription} />
 
-                    {!isSubmit ? <button className="button-save" onClick={handleSaveTitle}>Lưu</button> : <button className="button-save" disabled>Đang lưu...</button>}
+                    {!isSubmit ? <button className='button-save' onClick={handleSaveDescription}>Lưu</button> : <button className='button-save' disabled>Đang lưu...</button>}
 
-                </div> : <div>{chapter.title}</div>
+                </div> : chapter.description ? <div className='content' style={{ marginTop: '12px', marginLeft: '8px' }} dangerouslySetInnerHTML={{ __html: chapter.description }}></div> : <div style={{ fontStyle: 'italic' }}>Chưa có mô tả</div>
             }
 
         </div>
     )
 }
 
-export default TitleForm
+export default DescriptionForm
+
+{/* <ReactQuill theme="snow" value={description} onChange={setDescription} /> */ }

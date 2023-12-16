@@ -127,7 +127,7 @@
                     }
                 }
 
-                button {
+                .button-save {
                     width: 80px;
                     border: none;
                     background-color: #111625;
@@ -237,18 +237,44 @@
                     }
                 }
 
-                button {
-                    width: 80px;
-                    border: none;
-                    background-color: #111625;
-                    color: white;
-                    height: 38px;
-                    font-weight: bold;
-                    border-radius: 8px;
-                }
+
             }
         }
     }
 
 
+}
+
+.content {
+    p {
+        margin: 0 !important;
+    }
+}
+
+
+.btn-control {
+    &:hover {
+        opacity: 0.5;
+    }
+}
+
+.button-save {
+    width: 80px;
+    border: none;
+    background-color: #111625;
+    color: white;
+    height: 38px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.5;
+    }
+}
+
+.button-cancel {
+    color: black !important;
+    background-color: white !important;
+    border: 1px solid #80808033;
 }

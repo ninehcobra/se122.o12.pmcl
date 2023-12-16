@@ -24,12 +24,14 @@ export default function Login() {
     const [isChecked, setIsChecked] = useState(false)
 
     const [isValid, setIsValid] = useState(true)
+    const [isFetch, setIsFetch] = useState(true)
 
     const fetchUser = async () => {
         let res = await getUserAccount()
         if (res && res.EC === 0 && res.DT) {
             router.push('/dashboard')
         }
+        setIsFetch(false)
     }
 
     useEffect(() => {
@@ -131,6 +133,9 @@ export default function Login() {
         }
     }
 
+    if (isFetch) {
+        return null
+    }
 
 
     return (

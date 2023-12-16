@@ -6,7 +6,9 @@ import { pathToRegexp } from 'path-to-regexp';
 const Sidebar = ({ children }) => {
     const pathname = usePathname()
     const coursesIdPath = pathToRegexp('/teacher/courses/:id');
+    const chapterIdPath = pathToRegexp('/teacher/courses/chapter/:id');
     const isCoursesIdPath = coursesIdPath.test(pathname);
+    const isChapterIdPath = chapterIdPath.test(pathname);
 
     return (
         <div className="app_sidebar">
@@ -15,7 +17,7 @@ const Sidebar = ({ children }) => {
 
                     <ul className="sidebar_list">
                         <li>
-                            <Link aria-current="page" className={pathname === '/teacher/courses' || pathname === '/teacher/create' || isCoursesIdPath ? "sidebar_item  onselect" : "sidebar_item"} href="/teacher/courses">
+                            <Link aria-current="page" className={pathname === '/teacher/courses' || pathname === '/teacher/create' || isCoursesIdPath || isChapterIdPath ? "sidebar_item  onselect" : "sidebar_item"} href="/teacher/courses">
                                 <i className="fa-solid fa-book"></i>
                                 <span>Khóa học</span>
                             </Link>

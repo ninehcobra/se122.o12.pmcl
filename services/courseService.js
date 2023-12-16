@@ -113,6 +113,19 @@ const updateChapter = async (data) => {
     }
 }
 
+const deleteChapter = async (id) => {
+    try {
+        let res = await axios.post("/api/delete-chapter", { id: id })
+        checkRes(res.EC)
+        return res
+    } catch (error) {
+        return {
+            EC: -5,
+            EM: 'Can not connect to server'
+        }
+    }
+}
+
 export {
     createCourse,
     getCourse,
@@ -121,5 +134,6 @@ export {
     createChapter,
     updateChapterPosition,
     getChapter,
-    updateChapter
+    updateChapter,
+    deleteChapter
 }

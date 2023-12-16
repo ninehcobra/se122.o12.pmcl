@@ -1,18 +1,18 @@
 'use client'
 
-import { updateCourse } from "@/services/courseService"
+import { updateChapter } from "@/services/courseService"
 import { useRouter } from "next/navigation"
 import { useState, useRef, useCallback } from "react"
 import { toast } from "react-toastify"
 import { useDropzone } from 'react-dropzone'
 import axios from 'axios';
 
-const ThumbnailForm = (params) => {
+const VideoForm = (params) => {
 
-    let course = params.course
+    let chapter = params.chapter
     let changeCompletionText = params.changeCompletionText
 
-    const [thumbnail, setThumbnail] = useState()
+    const [video, setVideo] = useState()
     const [isEditing, setIsEditing] = useState(false)
 
     const [isSubmit, setIsSubmit] = useState(false)
@@ -21,7 +21,7 @@ const ThumbnailForm = (params) => {
 
     const onDrop = useCallback(acceptedFiles => {
         if (acceptedFiles) {
-            setThumbnail(acceptedFiles[0])
+            setVideo(acceptedFiles[0])
         }
 
 
@@ -29,31 +29,31 @@ const ThumbnailForm = (params) => {
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
-    const uploadImg = async (file) => {
-        if (file && (file.type === "image/png" || file.type === "image/jpg" || file.type === "image/jpeg")) {
-            const image = new FormData()
-            image.append("file", file)
-            image.append("cloud_name", "dwpz7w8y4")
-            image.append("upload_preset", "bleu4scs")
+    const uploadVideo = async (file) => {
+        if (file && (file.type.includes("video"))) {
+            const videoData = new FormData()
+            videoData.append("file", file)
+            videoData.append("cloud_name", "dwpz7w8y4")
+            videoData.append("upload_preset", "bleu4scs")
 
-            const res = await axios.post("https://api.cloudinary.com/v1_1/dwpz7w8y4/image/upload", image)
+            const res = await axios.post("https://api.cloudinary.com/v1_1/dwpz7w8y4/video/upload", videoData)
 
-            const imgData = res.data.secure_url
-            return imgData
+            const videoURL = res.data.secure_url
+            return videoURL
         }
     }
 
 
-    const handleSaveImage = async () => {
+    const handleSaveVideo = async () => {
         setIsSubmit(true)
-        if (thumbnail) {
-            let linkThumnail = await uploadImg(thumbnail)
-            course.thumbnail = linkThumnail
-            let res = await updateCourse(course)
+        if (video) {
+            let linkVideo = await uploadVideo(video)
+            chapter.videoUrl = linkVideo
+            let res = await updateChapter(chapter)
             if (res && res.EC === 0) {
-                changeCompletionText(course)
+                changeCompletionText(chapter)
                 toast('Lưu thành công')
-                setThumbnail('')
+                setVideo('')
                 setIsEditing(false)
                 setIsSubmit(false)
                 router.refresh()
@@ -84,13 +84,13 @@ const ThumbnailForm = (params) => {
         <div className="title-form">
             <div className="title-form-label">
                 <div >
-                    Ảnh bìa
+                    Video
                 </div>
                 {!isEditing
                     ?
                     <div className="edit-btn" onClick={() => setIsEditing(true)} style={{ display: 'flex', alignItems: 'center' }}>
-                        {course.thumbnail ? <i class="fa-solid fa-pencil"></i> : <i class="fa-solid fa-circle-plus"></i>}
-                        <div onClick={() => { setIsEditing(true) }} style={{ marginLeft: '12px' }}>{!course.thumbnail ? 'Thêm ảnh' : 'Sửa ảnh'}</div>
+                        {chapter.videoURL ? <i class="fa-solid fa-pencil"></i> : <i class="fa-solid fa-circle-plus"></i>}
+                        <div onClick={() => { setIsEditing(true) }} style={{ marginLeft: '12px' }}>{!chapter.videoUrl ? 'Thêm Video' : 'Sửa Video'}</div>
                     </div>
                     :
 
@@ -104,20 +104,12 @@ const ThumbnailForm = (params) => {
 
                 {isEditing ?
 
-                    <div>
-                        {thumbnail
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        {video
                             ?
-                            <div >
-
-                                <img onClick={handleImageClick} src={URL.createObjectURL(thumbnail)} style={{ width: '100%' }}></img>
-
-                                <input
-                                    type="file"
-                                    ref={fileInputRef}
-                                    style={{ display: 'none' }}
-                                    onChange={handleFileChange}
-                                />
-                            </div>
+                            <video controls>
+                                <source style={{ width: '100%' }} src={URL.createObjectURL(video)} type="video/mp4"></source>
+                            </video>
                             :
                             <div className='drag_wrapper' {...getRootProps()}>
                                 <input {...getInputProps()} />
@@ -132,19 +124,23 @@ const ThumbnailForm = (params) => {
                                 }
                             </div>
                         }
-                        {!isSubmit ? <button style={{ marginTop: '12px' }} onClick={handleSaveImage}>Lưu</button> : <button style={{ marginTop: '12px', width: '120px' }} disabled>Đang lưu...</button>}
+                        {!isSubmit ? <button className="button-save" style={{ marginTop: '12px' }} onClick={handleSaveVideo}>Lưu</button> : <button className="button-save" style={{ marginTop: '12px', width: '120px' }} disabled>Đang lưu...</button>}
                     </div>
 
 
 
-                    : course.thumbnail ? <img style={{ marginTop: '12px' }} src={course.thumbnail}></img> :
-                        <div style={{ width: '100 %', height: '350px', backgroundColor: '#C0C5CD', borderRadius: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <img style={{ height: '80px', width: '80px' }} src="https://raw.githubusercontent.com/ninehcobra/free-host-image/main/none-img.png" />
+                    : chapter.videoUrl ?
+                        <div>
+                            <video style={{ width: '100%' }} controls>
+                                <source src={chapter.videoUrl} type="video/mp4"></source>
+                            </video>
                         </div>
+                        :
+                        <div style={{ fontStyle: 'italic' }}>Chưa có Video nào</div>
                 }
             </div>
         </div>
     )
 }
 
-export default ThumbnailForm
+export default VideoForm

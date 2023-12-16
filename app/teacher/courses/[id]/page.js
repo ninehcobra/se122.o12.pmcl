@@ -65,7 +65,7 @@ const Courses = ({ params }) => {
 
     return (
         course ?
-            <div>
+            <div style={{ padding: "0 40px 0 20px" }}>
                 <div className="create-course-process">
                     <div className="title">Thiết lập khóa học</div>
                     <div className="process">Tiến độ thiết lập {completionText}</div>

@@ -73,10 +73,16 @@ const ChapterList = ({ items, onReorder }) => {
                                                     className="h-5 w-5"
                                                 />
                                             </div>
-                                            <div style={{ marginLeft: '10px', display: 'flex', alignItems: 'center', width: '100%' }}>
+                                            <div style={{ padding: '4px', marginLeft: '10px', display: 'flex', alignItems: 'center', width: '100%' }}>
                                                 {chapter.title}
                                             </div>
                                             <div style={{ display: 'flex' }}>
+                                                {chapter.isFree ? <div style={{
+                                                    marginRight: '12px', backgroundColor: 'blueviolet', width: '80px', fontSize: '12px', fontWeight: 'bold', height: '26px',
+                                                    display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', borderRadius: '20px', paddingTop: '2px'
+                                                }}>
+                                                    Miễn phí
+                                                </div> : ''}
                                                 <div style={{
                                                     marginRight: '12px', backgroundColor: chapter.isPublished ? 'green' : '#59657B', width: '80px', fontSize: '12px', fontWeight: 'bold', height: '26px',
                                                     display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', borderRadius: '20px', paddingTop: '2px'
@@ -86,6 +92,7 @@ const ChapterList = ({ items, onReorder }) => {
                                                         :
                                                         ' Mẫu '
                                                     }</div>
+
                                                 <div onClick={() => { router.push(`/teacher/courses/chapter/${chapter.id}`) }} style={{ cursor: 'pointer' }}>
                                                     <Pencil style={{ marginRight: '4px' }} />
                                                 </div>
