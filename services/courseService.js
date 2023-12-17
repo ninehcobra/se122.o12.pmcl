@@ -13,6 +13,19 @@ const createCourse = async (title) => {
     }
 }
 
+const deleteCourse = async (id) => {
+    try {
+        let res = await axios.post("/api/delete-course", { id: id })
+        checkRes(res.EC)
+        return res
+    } catch (error) {
+        return {
+            EC: -5,
+            EM: 'Can not connect to server'
+        }
+    }
+}
+
 const updateCourse = async (data) => {
     try {
         let res = await axios.post("/api/update-course", { data })
@@ -35,6 +48,21 @@ const getCourse = async (id) => {
         return {
             EC: -5,
             EM: 'Can not connect to server'
+        }
+    }
+}
+
+const getAllCourse = async (page, limit) => {
+    try {
+        let res = await axios.post(`/api/teacher-course`, {
+            page, limit
+        })
+        checkRes(res.EC)
+        return res
+    } catch (error) {
+        return {
+            EC: -5,
+            EM: error
         }
     }
 }
@@ -135,5 +163,7 @@ export {
     updateChapterPosition,
     getChapter,
     updateChapter,
-    deleteChapter
+    deleteChapter,
+    deleteCourse,
+    getAllCourse
 }

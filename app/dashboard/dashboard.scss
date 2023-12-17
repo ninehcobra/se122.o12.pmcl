@@ -4,6 +4,7 @@
 
     .app_sidebar_wrap {
         flex-shrink: 0;
+        border-right: 1px solid #80808033;
 
         .app_sidebar_wrapper {
             --width: 96px;
@@ -383,4 +384,43 @@
     padding: 0 !important;
     font: inherit;
     top: 118px;
+}
+
+.course-wrapper {
+    margin-top: 20px;
+
+    .category-list {
+        display: flex;
+
+        .selected {
+            border: 1px solid #085D94 !important;
+            background-color: #F1F9FF !important;
+        }
+
+        .category-item {
+            font-size: 14px;
+            color: black;
+            margin-right: 12px;
+            border: 1px solid #80808033;
+            padding: 5px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+
+            &:hover {
+                border: 1px solid black;
+            }
+
+            .category-title {
+                margin-left: 4px;
+            }
+
+            .category-icon {
+                font-size: 20px;
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+
 }

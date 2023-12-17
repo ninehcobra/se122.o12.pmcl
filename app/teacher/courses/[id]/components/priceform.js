@@ -62,7 +62,7 @@ const PriceForm = (params) => {
 
             {isEditing ?
                 <div className="title-form-wrapper">
-                    <input onChange={(e) => setPrice(e.target.value)} value={price} placeholder="Giá mới" />
+                    <input type="number" onChange={(e) => setPrice(e.target.value)} value={price} placeholder="Giá mới" />
 
                     {!isSubmit ? <button onClick={handleSaveTitle}>Lưu</button> : <button disabled>Đang lưu...</button>}
 

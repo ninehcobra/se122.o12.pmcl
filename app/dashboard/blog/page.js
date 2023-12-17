@@ -1,10 +1,10 @@
 'use client'
-import { useEffect, useState } from 'react'
 import "./blog.scss"
 import { useDispatch, useSelector } from 'react-redux'
 import { getBlog } from "../../../services/blogService"
 import ReactPaginate from 'react-paginate';
 import Link from 'next/link'
+import { useEffect, useState } from "react";
 
 const Blog = () => {
 

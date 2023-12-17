@@ -66,7 +66,7 @@ const ChapterList = ({ items, onReorder }) => {
                                     >
                                         <div style={{ display: 'flex', backgroundColor: '#DEE3ED', padding: '6px', marginBottom: '16px', borderRadius: '5px', alignItems: 'center' }}>
                                             <div
-                                                style={{ height: '100%' }}
+                                                style={{ height: '100%', borderRight: '1px solid #80808033', paddingRight: '0 4px' }}
                                                 {...provided.dragHandleProps}
                                             >
                                                 <Grip
