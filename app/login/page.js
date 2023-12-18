@@ -92,8 +92,8 @@ export default function Login() {
                             roles: res.DT.roles
                         }
                     }
-                    dispatch(loginRedux(data))
-                    localStorage.setItem("jwt", res.DT.access_token)
+                    await dispatch(loginRedux(data))
+                    await localStorage.setItem("jwt", res.DT.access_token)
                     toast('Đăng nhập thành công')
 
                     router.push('/dashboard')
@@ -171,7 +171,7 @@ export default function Login() {
                                     <input checked={isChecked} onChange={() => setIsChecked(!isChecked)} type="checkbox" className="form-check-input" />
                                     <label className="form-check-label">Ghi nhớ mật khẩu</label>
                                 </div>
-                                <button onClick={onLogin} className="btn btn-filled btn-round"><span className="bh"></span> <span>Login</span></button>
+                                <button onClick={onLogin} className="btn btn-filled btn-round"><span className="bh"></span> <span>Đăng nhập</span></button>
                                 <p className="notice">Chưa có tài khoản <Link href="/register">Đăng ký Ngay</Link></p>
                             </div>
                         </div>

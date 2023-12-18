@@ -1,18 +1,34 @@
 'use client'
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FcBarChart, FcParallelTasks, FcStackOfPhotos, FcSportsMode, FcMusic, FcCompactCamera, FcEngineering } from "react-icons/fc";
-
+import { getUserCourse } from "@/services/courseService"
+import Spinner from 'react-bootstrap/Spinner';
+import CourseList from "./components/CourseList"
 const Course = () => {
     const [selectedCategory, setSelectedCategory] = useState(''); // Khởi tạo giá trị mặc định
+    const [isFetch, setIsFetch] = useState(true)
+    const [courses, setCourses] = useState(null)
 
-    const info = useSelector((state: any) => state.personalInfo);
-    const dispatch: any = useDispatch();
+    const info = useSelector((state) => state.personalInfo);
+    const dispatch = useDispatch();
 
-    const handleCategoryClick = (categoryTitle: string) => {
+    const handleCategoryClick = (categoryTitle) => {
         setSelectedCategory(categoryTitle);
     };
+
+    const fetchCourse = async () => {
+        let res = await getUserCourse()
+        if (res && res.EC === 0 && res.DT) {
+            setCourses(res.DT)
+        }
+        setIsFetch(false)
+    }
+
+    useEffect(() => {
+        fetchCourse()
+    }, [])
 
     return (
         <div className='course-wrapper'>
@@ -66,6 +82,18 @@ const Course = () => {
                     <div className='category-icon'><FcEngineering /></div>
                     <div className='category-title'>Kỹ thuật</div>
                 </div>
+            </div>
+            <div>
+                {isFetch
+                    ?
+                    <div style={{ height: '75vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <Spinner variant='info' />
+                    </div>
+                    :
+                    <div>
+                        <CourseList courses={courses} />
+                    </div>
+                }
             </div>
         </div>
     );

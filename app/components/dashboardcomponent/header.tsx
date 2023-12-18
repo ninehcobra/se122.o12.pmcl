@@ -63,7 +63,7 @@ const Header = (params: any) => {
                     <img src="https://raw.githubusercontent.com/ninehcobra/free-host-image/main/News/logo.png" alt="nineh" />
                 </Link>
                 <h4 style={params && params.searchHide ? { display: 'none' } : {}} className="navbar_logo_heading">Nineh Learning</h4>
-                {params && params.searchHide ? <div onClick={() => router.back()} style={{ color: '#808990', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold', marginLeft: '10px' }}>{`<< QUAY LẠI`}</div> : ''}
+                {params && params.searchHide && !params.backBtn ? <div onClick={() => router.back()} style={{ color: '#808990', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold', marginLeft: '10px' }}>{`<< QUAY LẠI`}</div> : ''}
             </Link>
             <div className="navbar_body">
                 <div>

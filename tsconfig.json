@@ -37,7 +37,8 @@
     "app/login/page.js",
     "app/components/homecomponent/authcheck.tsx",
     "app/dashboard/blog/page.js",
-    "app/create-blog/page.js"
+    "app/create-blog/page.js",
+    "app/dashboard/course/page.js"
   ],
   "exclude": [
     "node_modules"
