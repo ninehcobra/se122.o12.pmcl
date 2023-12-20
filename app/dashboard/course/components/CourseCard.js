@@ -1,5 +1,6 @@
 import { FiBookOpen } from "react-icons/fi";
 import Link from "next/link";
+import ProgressBar from "@ramonak/react-progress-bar";
 
 const CourseCard = (params) => {
     const course = params.course
@@ -22,9 +23,16 @@ const CourseCard = (params) => {
                         <div style={{ marginLeft: '4px', color: '#808080', fontSize: '14px' }}>{course.Chapters.length} Chương</div>
                     </div>
                     {course.progress !== null ?
-                        <div>Progess</div>
+                        <div style={{ marginTop: '8px' }}>
+                            <ProgressBar
+                                bgColor={'#0183C5'}
+                                height="10px"
+                                isLabelVisible={false}
+                                completed={course.progress} />
+                            <div style={{ margin: ' 8px 0', fontWeight: 'bold', color: '#0183C5' }}>Hoàn thành {course.progress} %</div>
+                        </div>
                         :
-                        <p style={{ marginTop: '8px' }}>{course.newPrice} VNĐ</p>
+                        <p style={{ marginTop: '8px', fontWeight: 'bold' }}>{course.newPrice.toLocaleString('vi-VN')} VNĐ</p>
                     }
                 </div>
 

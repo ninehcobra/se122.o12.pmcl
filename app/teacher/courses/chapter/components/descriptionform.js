@@ -19,7 +19,6 @@ const DescriptionForm = (params) => {
     const handleSaveDescription = async () => {
         if (description) {
             chapter.description = description
-            console.log(chapter)
             let res = await updateChapter(chapter)
             if (res && res.EC === 0) {
                 changeCompletionText(chapter)

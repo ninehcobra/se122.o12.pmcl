@@ -19,7 +19,7 @@ const Course = () => {
     };
 
     const fetchCourse = async () => {
-        let res = await getUserCourse()
+        let res = await getUserCourse(selectedCategory)
         if (res && res.EC === 0 && res.DT) {
             setCourses(res.DT)
         }
@@ -28,56 +28,58 @@ const Course = () => {
 
     useEffect(() => {
         fetchCourse()
-    }, [])
+    }, [selectedCategory])
+
+
 
     return (
         <div className='course-wrapper'>
             <div className='category-list'>
                 <div
-                    className={`category-item ${selectedCategory === 'Kế toán' ? 'selected' : ''}`}
-                    onClick={() => handleCategoryClick(selectedCategory === 'Kế toán' ? '' : 'Kế toán')}
+                    className={`category-item ${selectedCategory === 1 ? 'selected' : ''}`}
+                    onClick={() => handleCategoryClick(selectedCategory === 1 ? '' : 1)}
                 >
                     <div className='category-icon'><FcBarChart /></div>
                     <div className='category-title'>Kế toán</div>
                 </div>
                 <div
-                    className={`category-item ${selectedCategory === 'Khoa học máy tính' ? 'selected' : ''}`}
-                    onClick={() => handleCategoryClick(selectedCategory === 'Khoa học máy tính' ? '' : 'Khoa học máy tính')}
+                    className={`category-item ${selectedCategory === 2 ? 'selected' : ''}`}
+                    onClick={() => handleCategoryClick(selectedCategory === 2 ? '' : 2)}
                 >
                     <div className='category-icon'><FcParallelTasks /></div>
                     <div className='category-title'>Khoa học máy tính</div>
                 </div>
                 <div
-                    className={`category-item ${selectedCategory === 'Quay phim' ? 'selected' : ''}`}
-                    onClick={() => handleCategoryClick(selectedCategory === 'Quay phim' ? '' : 'Quay phim')}
+                    className={`category-item ${selectedCategory === 3 ? 'selected' : ''}`}
+                    onClick={() => handleCategoryClick(selectedCategory === 3 ? '' : 3)}
                 >
                     <div className='category-icon'><FcStackOfPhotos /></div>
                     <div className='category-title'>Quay phim</div>
                 </div>
                 <div
-                    className={`category-item ${selectedCategory === 'Thể thao' ? 'selected' : ''}`}
-                    onClick={() => handleCategoryClick(selectedCategory === 'Thể thao' ? '' : 'Thể thao')}
+                    className={`category-item ${selectedCategory === 4 ? 'selected' : ''}`}
+                    onClick={() => handleCategoryClick(selectedCategory === 4 ? '' : 4)}
                 >
                     <div className='category-icon'><FcSportsMode /></div>
                     <div className='category-title'>Thể thao</div>
                 </div>
                 <div
-                    className={`category-item ${selectedCategory === 'Âm nhạc' ? 'selected' : ''}`}
-                    onClick={() => handleCategoryClick(selectedCategory === 'Âm nhạc' ? '' : 'Âm nhạc')}
+                    className={`category-item ${selectedCategory === 5 ? 'selected' : ''}`}
+                    onClick={() => handleCategoryClick(selectedCategory === 5 ? '' : 5)}
                 >
                     <div className='category-icon'><FcMusic /></div>
                     <div className='category-title'>Âm nhạc</div>
                 </div>
                 <div
-                    className={`category-item ${selectedCategory === 'Chụp ảnh' ? 'selected' : ''}`}
-                    onClick={() => handleCategoryClick(selectedCategory === 'Chụp ảnh' ? '' : 'Chụp ảnh')}
+                    className={`category-item ${selectedCategory === 6 ? 'selected' : ''}`}
+                    onClick={() => handleCategoryClick(selectedCategory === 6 ? '' : 6)}
                 >
                     <div className='category-icon'><FcCompactCamera /></div>
                     <div className='category-title'>Chụp ảnh</div>
                 </div>
                 <div
-                    className={`category-item ${selectedCategory === 'Kỹ thuật' ? 'selected' : ''}`}
-                    onClick={() => handleCategoryClick(selectedCategory === 'Kỹ thuật' ? '' : 'Kỹ thuật')}
+                    className={`category-item ${selectedCategory === 7 ? 'selected' : ''}`}
+                    onClick={() => handleCategoryClick(selectedCategory === 7 ? '' : 7)}
                 >
                     <div className='category-icon'><FcEngineering /></div>
                     <div className='category-title'>Kỹ thuật</div>

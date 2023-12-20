@@ -21,7 +21,6 @@ const TitleForm = (params) => {
     const handleSaveTitle = async () => {
         if (title) {
             course.title = title
-            console.log(course)
             let res = await updateCourse(course)
             if (res && res.EC === 0) {
                 changeCompletionText(course)

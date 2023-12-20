@@ -2,10 +2,42 @@
 
 import { useEffect, useState } from "react"
 import { getChapterDetail } from "@/services/courseService"
+import { PayPalButton } from "react-paypal-button-v2"
+import { toast } from 'react-toastify'
+import { purchase } from "@/services/courseService"
+import { useRouter } from "next/navigation"
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import { markComplete } from "@/services/courseService"
+import { set } from "lodash"
 
-const ChapterDetail = ({ chapter, isPurchase, course }) => {
+
+const ChapterDetail = ({ chapter, isPurchase, course, setIsDone }) => {
+
+    const router = useRouter()
+
+    const [isPay, setIsPay] = useState(false)
+    const convertCurrency = (amount) => {
+        const fixedRate = 0.000043;
+        const amountUSD = amount * fixedRate;
+        return amountUSD.toString()
+    };
+
+    const purchaseCourse = async () => {
+        let res = await purchase(course.id)
+        if (res && res.EC === 0) {
+            setIsDone(true)
+            return (true)
+        }
+        return (false)
+    }
 
 
+    const handleMarkCompleted = async () => {
+        let res = await markComplete(chapter.id)
+
+        setIsDone(true)
+
+    }
 
     if (chapter === null) {
         return null
@@ -16,11 +48,49 @@ const ChapterDetail = ({ chapter, isPurchase, course }) => {
                 {chapter.videoUrl ? <video style={{ width: '100%' }} src={chapter.videoUrl} controls></video> : ''}
                 <div style={{ marginTop: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div style={{ fontSize: '24px', color: 'black', fontWeight: 'bold' }}>{chapter.title}</div>
-                    {isPurchase ? '' :
-                        <div style={{
-                            height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#262B3A', color: 'white', padding: '0 10px',
-                            borderRadius: '5px', fontWeight: 'bold'
-                        }}>MUA KHÓA HỌC VỚI {course.newPrice} VNĐ</div>
+                    {isPurchase ?
+                        (
+                            !chapter.Progresses.length > 0 ?
+                                <div onClick={handleMarkCompleted} style={{ height: '25px', backgroundColor: '#027551', display: 'flex', alignItems: 'center', padding: '20px', borderRadius: '5px' }}>
+                                    <div style={{ color: 'white', marginRight: '8px', fontWeight: 'bold' }}>Đánh dấu hoàn thành</div>
+                                    <IoMdCheckmarkCircleOutline style={{ color: 'white', fontSize: '24px' }} />
+                                </div>
+                                : ''
+                        )
+                        :
+                        isPay ?
+                            <div>
+                                <PayPalButton
+                                    amount={convertCurrency(course.newPrice)}
+                                    // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
+                                    onSuccess={(details, data) => {
+                                        if (purchaseCourse()) { toast("Thanh toán thành công bởi " + details.payer.name.given_name); }
+                                        else toast.error('Thanh toán không thành công')
+
+
+                                    }}
+                                    onError={() => {
+                                        toast.error('Thanh toán không thành công')
+                                    }}
+                                    onCancel={() => {
+                                        toast.error('Thanh toán không thành công')
+                                    }}
+                                    options={{
+                                        clientId: "ATB021v7PNCgCGfG5cYkEJVwGS-SnAWjHCLg8tZnkqk0yMIQWKLSphyh72YpWezyCy3dHXpXG3ZsQejb"
+                                    }}
+                                />
+                                <div>
+                                    <button onClick={() => setIsPay(false)} style={{ width: '100%', border: 'none', fontWeight: 'bold' }}>HỦY</button>
+                                </div>
+                            </div>
+                            :
+                            <div>
+                                <div onClick={() => setIsPay(true)} style={{
+                                    height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#262B3A', color: 'white', padding: '0 10px',
+                                    borderRadius: '5px', fontWeight: 'bold'
+                                }}>MUA KHÓA HỌC VỚI {course.newPrice} VNĐ</div>
+
+                            </div>
                     }
                 </div>
                 <div style={{ borderBottom: '1px solid #80808033', marginTop: '12px' }} />

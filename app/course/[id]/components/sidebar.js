@@ -12,10 +12,17 @@ import { FaBatteryFull } from "react-icons/fa";
 import ChapterDetail from "../components/chapterdetail"
 import Header from "../../../components/dashboardcomponent/header"
 import { getChapterDetail } from "@/services/courseService"
+import { PayPalButton } from "react-paypal-button-v2"
+import { toast } from "react-toastify";
+import { purchase } from "@/services/courseService";
+import ProgressBar from "@ramonak/react-progress-bar";
 
-const Sidebar = ({ course, isPurchase }) => {
+const Sidebar = ({ course, isPurchase, handleRefreshPage }) => {
     const [activeId, setActiveId] = useState(null)
+    const [isDone, setIsDone] = useState(false)
     const [chapter, setChapter] = useState(null)
+    const [isPay, setIsPay] = useState(false)
+    const [price, setPrice] = useState(course.newPrice)
 
     const changeActiveId = (id, type = 1) => {
         if (type === 1) {
@@ -37,16 +44,44 @@ const Sidebar = ({ course, isPurchase }) => {
             fetchChapterDetail(activeId)
         }
 
-    }, [activeId])
+    }, [activeId, isDone])
 
+    const convertCurrency = (amount) => {
+        const fixedRate = 0.000043;
+        const amountUSD = amount * fixedRate;
+        return amountUSD.toString()
+    };
+    const purchaseCourse = async () => {
+        let res = await purchase(course.id)
+        if (res && res.EC === 0) {
+            handleRefreshPage()
+            return (true)
+        }
+        return (false)
+    }
+
+    const handleRefresh = () => {
+        setIsDone(!isDone)
+        handleRefreshPage()
+    }
 
 
     return (
         <div className="app_sidebar">
             <div className="app_sidebar_wrap teacher_mode course_detail">
                 <div className="course_title">
-                    <div>{course.title}</div>
+                    <div style={{ marginTop: '24px', padding: '0 12px' }}>{course.title}</div>
+                    {isPurchase ? <div style={{ marginTop: '8px', width: '100%', padding: '12px' }}>
+                        <ProgressBar
+                            bgColor={'#0183C5'}
+                            height="10px"
+                            isLabelVisible={false}
+                            completed={course.progress} />
+                        <div style={{ margin: ' 8px 0', fontWeight: 'bold', color: '#0183C5' }}>Hoàn thành {course.progress} %</div>
+                    </div> : <div style={{ marginBottom: '24px' }}></div>}
+
                 </div>
+
                 <div className="chapter-list">
                     {course ?
                         course.Chapters.map((chapter) => {
@@ -72,7 +107,7 @@ const Sidebar = ({ course, isPurchase }) => {
                 <Header backBtn={true} searchHide={true} />
                 {activeId ?
 
-                    <ChapterDetail course={course} chapter={chapter} isPurchase={isPurchase} />
+                    <ChapterDetail course={course} chapter={chapter} isPurchase={isPurchase} setIsDone={handleRefresh} />
                     :
 
                     <div style={{ padding: '20px 10px 0 40px', display: 'flex' }}>
@@ -112,26 +147,63 @@ const Sidebar = ({ course, isPurchase }) => {
                             <div style={{ marginTop: '8px' }}>
                                 {
                                     isPurchase ?
-                                        <div style={{
-                                            height: '40px', width: '120px', borderRadius: '20px', backgroundColor: '#F05123', color: 'white', display: 'flex',
-                                            alignItems: 'center', justifyContent: 'center', fontWeight: 'bold',
-                                        }}>
+                                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                            <div style={{
+                                                height: '40px', width: '120px', borderRadius: '20px', backgroundColor: '#F05123', color: 'white', display: 'flex',
+                                                alignItems: 'center', justifyContent: 'center', fontWeight: 'bold',
+                                            }}>
 
-                                            TIẾP TỤC HỌC
+                                                TIẾP TỤC HỌC
+
+                                            </div>
+                                            <div style={{ marginTop: '12px', display: 'flex', width: '250px', color: 'black' }}>
+                                                <div style={{ display: 'flex', width: '20%', alignItems: 'flex-end', marginRight: '8px', flexDirection: 'column', lineHeight: '40px' }}>
+                                                    <PiChalkboardTeacherBold style={{ fontSize: '24px', marginTop: '4px' }} />
+                                                    <FaBookOpen style={{ fontSize: '24px', marginTop: '4px' }} />
+                                                    <FaBatteryFull style={{ fontSize: '24px', marginTop: '4px' }} />
+                                                </div>
+                                                <div style={{ display: 'flex', width: '80%', alignItems: 'flex-start', flexDirection: 'column', lineHeight: '26px' }}>
+                                                    <div style={{ marginTop: '4px' }}>{course.User.name}</div>
+                                                    <div style={{ marginTop: '4px' }}>Tổng <strong>{course.Chapters.length}</strong> bài học</div>
+                                                    <div style={{ marginTop: '2px' }}>Học ở mọi nơi</div>
+                                                </div>
+                                            </div>
                                         </div>
                                         :
                                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                             <div style={{
                                                 display: 'flex',
                                                 alignItems: 'center', justifyContent: 'center', fontSize: '24px', margin: '12px 0', color: '#F05123'
-                                            }}>{course.newPrice} VNĐ</div>
-                                            <div style={{
-                                                height: '40px', width: '120px', borderRadius: '20px', backgroundColor: '#F05123', color: 'white', display: 'flex',
-                                                alignItems: 'center', justifyContent: 'center', fontWeight: 'bold',
-                                            }}>
+                                            }}>{course.newPrice.toLocaleString('vi-VN')} VNĐ</div>
+                                            {
+                                                isPay
+                                                    ?
+                                                    <PayPalButton
+                                                        amount={convertCurrency(course.newPrice)}
+                                                        // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
+                                                        onSuccess={(details, data) => {
+                                                            if (purchaseCourse()) { toast("Thanh toán thành công bởi " + details.payer.name.given_name); }
+                                                            else toast.error('Thanh toán không thành công')
+                                                        }}
+                                                        onError={() => {
+                                                            toast.error('Thanh toán không thành công')
+                                                        }}
+                                                        onCancel={() => {
+                                                            toast.error('Thanh toán không thành công')
+                                                        }}
+                                                        options={{
+                                                            clientId: "ATB021v7PNCgCGfG5cYkEJVwGS-SnAWjHCLg8tZnkqk0yMIQWKLSphyh72YpWezyCy3dHXpXG3ZsQejb"
+                                                        }}
+                                                    />
+                                                    :
+                                                    <div onClick={() => setIsPay(true)} style={{
+                                                        height: '40px', width: '120px', borderRadius: '20px', backgroundColor: '#F05123', color: 'white', display: 'flex',
+                                                        alignItems: 'center', justifyContent: 'center', fontWeight: 'bold',
+                                                    }}>
 
-                                                ĐĂNG KÝ HỌC
-                                            </div>
+                                                        ĐĂNG KÝ HỌC
+                                                    </div>
+                                            }
                                             <div style={{ marginTop: '12px', display: 'flex', width: '250px', color: 'black' }}>
                                                 <div style={{ display: 'flex', width: '20%', alignItems: 'flex-end', marginRight: '8px', flexDirection: 'column', lineHeight: '40px' }}>
                                                     <PiChalkboardTeacherBold style={{ fontSize: '24px', marginTop: '4px' }} />

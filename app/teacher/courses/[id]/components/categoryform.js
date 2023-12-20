@@ -11,7 +11,7 @@ const CategoryForm = (params) => {
     let course = params.course
     let changeCompletionText = params.changeCompletionText
 
-    console.log(course)
+
 
     const [isEditing, setIsEditing] = useState(false)
     const [categoryId, setCateGoryId] = useState(course.categoryId)
@@ -35,7 +35,6 @@ const CategoryForm = (params) => {
     const handleSaveCategoryId = async () => {
         if (categoryId) {
             course.categoryId = categoryId
-            console.log(course)
             let res = await updateCourse(course)
             if (res && res.EC === 0) {
                 changeCompletionText(course)

@@ -70,7 +70,7 @@ export default function Page({ params }) {
             </div>
         )
     }
-    console.log(blog)
+
 
     return (
         <div>

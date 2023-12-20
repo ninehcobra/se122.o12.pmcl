@@ -16,7 +16,6 @@ const Courses = () => {
     const getAllCourses = async (page, limit) => {
         try {
             let res = await getAllCourse(page, limit)
-            console.log(res)
 
             if (res && res.DT) {
                 setListCourse(res.DT.courses)

@@ -21,7 +21,6 @@ const AccessForm = (params) => {
     const handleSaveIsFree = async () => {
 
         chapter.isFree = isFree
-        console.log(chapter)
         let res = await updateChapter(chapter)
         if (res && res.EC === 0) {
             changeCompletionText(chapter)

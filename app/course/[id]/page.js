@@ -13,6 +13,7 @@ const Course = ({ params }) => {
     const [isFetch, setIsFetch] = useState(true)
     const [course, setCourse] = useState(null)
     const [isPurchase, setIsPurchase] = useState(false)
+    const [isRefresh, setIsRefresh] = useState(false)
 
     const router = useRouter()
 
@@ -34,7 +35,7 @@ const Course = ({ params }) => {
 
     useEffect(() => {
         fetchListChapter()
-    }, [])
+    }, [isFetch, isRefresh])
 
     if (isFetch) {
         return (
@@ -44,10 +45,14 @@ const Course = ({ params }) => {
         )
     }
 
+    const handleRefresh = () => {
+        setIsRefresh(!isRefresh)
+    }
+
     return (
         <div>
             <AuthCheck>
-                <SideBar course={course} isPurchase={isPurchase}>
+                <SideBar updateProcess={setIsFetch} course={course} isPurchase={isPurchase} handleRefreshPage={handleRefresh}>
                     {params.id}
                 </SideBar>
             </AuthCheck>

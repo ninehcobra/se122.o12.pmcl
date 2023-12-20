@@ -110,7 +110,6 @@ const Course = () => {
         setIsCreate(true)
         if (title && description && content.contentHTML && content.contentMarkdown) {
             let imgThumb = null
-            console.log('go')
             if (thumbnail) {
                 let res = await uploadImg(thumbnail)
                 imgThumb = res

@@ -16,15 +16,15 @@
 
 
         .course_title {
-            height: 80px;
 
             display: flex;
-            align-items: center;
+
             justify-content: center;
             color: black;
             font-weight: bold;
             font-size: 16px;
             border-bottom: 1px solid #80808033;
+            flex-direction: column;
         }
 
         .chapter-list {

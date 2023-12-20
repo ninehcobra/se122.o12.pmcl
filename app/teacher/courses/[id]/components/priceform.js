@@ -21,7 +21,6 @@ const PriceForm = (params) => {
     const handleSaveTitle = async () => {
         if (price) {
             course.newPrice = price
-            console.log(course)
             let res = await updateCourse(course)
             if (res && res.EC === 0) {
                 changeCompletionText(course)

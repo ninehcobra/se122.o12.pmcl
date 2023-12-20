@@ -45,7 +45,6 @@ const Chapter = ({ params }) => {
         } else {
             return router.push('/teacher/courses');
         }
-        console.log(res.DT)
     }
 
     const changeCompletionText = (data, refresh = false) => {
