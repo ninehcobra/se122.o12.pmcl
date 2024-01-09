@@ -6,9 +6,9 @@ const CourseCard = (params) => {
     const course = params.course
     return (
         <Link href={`/course/${course.id}`} style={{ textDecoration: 'none' }} class="col">
-            <div class="card course-card">
+            <div class="card course-card" style={{ marginBottom: '8px' }}>
                 <div style={{ padding: '8px' }}>
-                    <img style={{ borderRadius: '5px' }} src={course.thumbnail} class="card-img-top" alt="Course Image" />
+                    <img style={{ borderRadius: '5px', height: '250px', width: '100%', objectFit: 'cover' }} src={course.thumbnail} class="card-img-top" alt="Course Image" />
                 </div>
 
 
@@ -29,7 +29,7 @@ const CourseCard = (params) => {
                                 height="10px"
                                 isLabelVisible={false}
                                 completed={course.progress} />
-                            <div style={{ margin: ' 8px 0', fontWeight: 'bold', color: '#0183C5' }}>Hoàn thành {course.progress} %</div>
+                            <div style={{ margin: ' 8px 0', fontWeight: 'bold', color: '#0183C5' }}>Hoàn thành {Math.round(course.progress)} %</div>
                         </div>
                         :
                         <p style={{ marginTop: '8px', fontWeight: 'bold' }}>{course.newPrice.toLocaleString('vi-VN')} VNĐ</p>

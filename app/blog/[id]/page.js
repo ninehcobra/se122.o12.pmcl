@@ -14,7 +14,7 @@ export default function Page({ params }) {
     const fetchBlogDetail = async () => {
         let res = await getBlogDetail(params.id)
         if (res.EC === 0) {
-            setBlog(res.DT)
+            setBlog(res.DT[0])
             setIsLoading(false)
         }
         else {
@@ -86,7 +86,7 @@ export default function Page({ params }) {
                                     <div className="blog-user">
                                         <a href={`/user/${blog.ownerId}`}>
                                             <div className="user-avatar-fallback">
-                                                <img src={blog.User.avatar}></img>
+                                                <img src={blog.User.avatar ? blog.User.avatar : ''}></img>
                                             </div>
                                         </a>
                                     </div>

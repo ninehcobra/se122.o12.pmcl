@@ -67,15 +67,12 @@ const Header = (params: any) => {
             </Link>
             <div className="navbar_body">
                 <div>
-                    <div style={params && params.searchHide ? { display: 'none' } : {}} className="search" aria-expanded="false">
-                        <i className="fa-solid fa-magnifying-glass search_icon" ></i>
-                        <input onChange={(e) => handleOnchange(e.target.value)} className="search_input" placeholder="Tìm kiếm khóa học, bài viết ..." value={search} />
-                    </div>
+
                 </div>
             </div>
             <div className="navbar_action">
                 <div>
-                    <button style={params && params.searchHide ? { display: 'none' } : {}} onClick={() => setMyCourse(!myCourse)} className="navbar_mylearn" aria-expanded="false">Khóa học của tôi</button>
+                    <button style={params && params.searchHide ? { display: 'none' } : {}} onClick={() => router.push('/dashboard')} className="navbar_mylearn" aria-expanded="false">Khóa học của tôi</button>
                     {myCourse ?
                         <div className="popup_mycourse" >
                             <ul className="mycourse_wrapper">

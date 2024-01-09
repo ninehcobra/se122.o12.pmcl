@@ -12,10 +12,11 @@ const Blog = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [limit, setLimit] = useState(5)
     const [totalPage, setTotalPage] = useState(0)
+    const [search, setSearch] = useState("")
 
     const getAllBlog = async (page, limit) => {
         try {
-            let res = await getBlog(page, limit)
+            let res = await getBlog(page, limit, search)
 
             if (res && res.DT) {
                 setListBlog(res.DT.blogs)
@@ -64,7 +65,7 @@ const Blog = () => {
     useEffect(() => {
         getAllBlog(currentPage, limit)
 
-    }, [currentPage]);
+    }, [currentPage, search]);
 
     const handlePageClick = (event) => {
         setCurrentPage(event.selected + 1)
@@ -79,7 +80,12 @@ const Blog = () => {
                         <p>Tổng hợp các bài viết chia sẻ về kinh nghiệm tự học cùng các lĩnh vực khác.</p>
                     </div>
                 </div>
-
+                <div style={{ marginBottom: '12px' }} >
+                    <div className="search" aria-expanded="false" >
+                        <i style={{ marginRight: '12px' }} className="fa-solid fa-magnifying-glass search_icon" ></i>
+                        <input style={{ outline: 'none', borderRadius: '20px', borderColor: '#80808033', padding: '4px' }} onChange={(e) => setSearch(e.target.value)} className="search_input" placeholder="Tìm kiếm blog..." value={search} />
+                    </div>
+                </div>
                 <div className="container_body">
                     <section className="section_content">
                         <section className="section_left">
@@ -120,11 +126,7 @@ const Blog = () => {
                                                                 <p className="post_item_desc">
                                                                     {item.description}
                                                                 </p>
-                                                                <div className="post_item_info">
-                                                                    <Link href="" className="post_item_tag">ReactJS</Link>
-                                                                    <span>{calTime(item.createdAt)}</span>
 
-                                                                </div>
                                                             </div>
                                                             <div className="post_item_thumb">
                                                                 <Link href={`/blog/${item.id}`}>
@@ -175,16 +177,16 @@ const Blog = () => {
                                 <h3>Các chủ đề được đề xuất</h3>
                                 <ul className="topiclist">
                                     <li>
-                                        <a href="/dashboard/blog/topic/front-end-mobile-apps">Front-end / Mobile apps</a>
+                                        <a href="/dashboard/blog">Công nghệ</a>
                                     </li>
                                     <li>
-                                        <a href="/dashboard/blog/topic/back-end-devops">Back-end / Devops</a>
+                                        <a href="/dashboard/blog">Thể thao</a>
                                     </li>
                                     <li>
-                                        <a href="/dashboard/blog/topic/ui-ux-design">UI / UX / Design</a>
+                                        <a href="/dashboard/blog">Âm nhạc và nghệ thuật</a>
                                     </li>
                                     <li>
-                                        <a href="/dashboard/blog/topic/others">Others</a>
+                                        <a href="/dashboard/blog">Khác</a>
                                     </li>
                                 </ul>
                             </div>

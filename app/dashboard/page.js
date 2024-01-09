@@ -1,11 +1,33 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Slider from "react-slick";
 import "./dashboard.scss"
 import { useSelector } from 'react-redux';
-
+import { getDashboardCourses } from '@/services/courseService';
+import CourseList from './course/components/CourseList';
+import { FaRegClock } from "react-icons/fa";
+import { BsCheck2Circle } from "react-icons/bs";
 
 export default function Dashboard() {
+
+    const [isFetch, setIsFetch] = useState(true)
+    const [completedCourses, setCompletedCourses] = useState([])
+    const [coursesInProgress, setCourseInProgress] = useState([])
+
+    const fetchCourse = async () => {
+        let res = await getDashboardCourses()
+        if (res && res.EC === 0 && res.DT) {
+            if (res.DT) {
+                setCompletedCourses(res.DT.completedCourses)
+                setCourseInProgress(res.DT.coursesInProgress)
+            }
+        }
+        setIsFetch(false)
+    }
+
+    useEffect(() => {
+        fetchCourse()
+    }, [])
 
     const settings = {
         dots: false,
@@ -17,6 +39,7 @@ export default function Dashboard() {
         prevArrow: <PrevArrow />
     };
 
+
     return (
         <section className="main_content">
             <div className="home_slideshow">
@@ -26,33 +49,26 @@ export default function Dashboard() {
                         <div className='slideshow_item'>
                             <div className="slideshow_left">
                                 <h2 className="slideshow_heading">
-                                    <a rel="noreferrer noopener noreferrer" target="_blank" href="https://fullstack.edu.vn/landing/htmlcss">Học HTML CSS cho người mới
+                                    <a rel="noreferrer noopener noreferrer" target="_blank" href="https://fullstack.edu.vn/landing/htmlcss">Đa dạng các khóa học
                                         <span className="Slideshow_crownIcon__j++0O">
                                             <img src="/static/media/crown_icon.3e4800f7485935ab6ea312a7080a85fe.svg" alt="" />
                                         </span>
                                     </a>
                                 </h2>
-                                <p className="slideshow_desc">Thực hành dự án với Figma, hàng trăm bài tập và thử thách, hướng dẫn 100% bởi Sơn Đặng, tặng kèm Flashcards, v.v.</p>
+                                <p className="slideshow_desc">Được giảng dạy bởi các giảng viên có chuyên môn cao và lâu năm trong ngành.</p>
                                 <div>
-                                    <a rel="noreferrer noopener noreferrer" className="slideshow_btn" target="_blank" href="https://fullstack.edu.vn/landing/htmlcss">HỌC THỬ MIỄN PHÍ</a>
+                                    <a rel="noreferrer noopener noreferrer" className="slideshow_btn" target="_blank" href="/dashboard/course">ĐĂNG KÝ HỌC NGAY</a>
                                 </div>
                             </div>
 
-                            <div className='slideshow_right'>
-                                <a rel="noreferrer noopener noreferrer" target="_blank" href="https://fullstack.edu.vn/landing/htmlcss">
-                                    <img className="Slideshow_img__K-c9+" src="https://files.fullstack.edu.vn/f8-prod/banners/20/6308a6bf603a4.png" alt="Khóa Học HTML CSS Pro" title="Học HTML CSS cho người mới" />
+                            <div className='slideshow_right' style={{ alignItems: 'center', display: 'flex' }}>
+                                <a rel="noreferrer noopener noreferrer" target="_blank" href="/dashboard/course">
+                                    <img style={{ height: '300px' }} className="Slideshow_img__K-c9+" src="https://raw.githubusercontent.com/ninehcobra/free-host-image/main/News/logo.png" />
                                 </a>
+                                <div style={{ color: 'white', marginRight: '65px', fontSize: '28px', fontWeight: 'bold' }}>Nineh Learning</div>
                             </div>
                         </div>
-                        <div>
-                            <h3>2</h3>
-                        </div>
-                        <div>
-                            <h3>3</h3>
-                        </div>
-                        <div>
-                            <h3>4</h3>
-                        </div>
+
 
                     </Slider>
 
@@ -61,142 +77,32 @@ export default function Dashboard() {
 
             {/* home wrapper */}
             <div className='home_wrapper'>
-                <div className="scrolllist">
-                    <div>
-                        <div className="scrolllist_heading_wrapper">
-                            <h2 className="scrolllist_heading">
-                                <span rel="noreferrer" target="_self">Các khóa học tiêu biểu
-                                    <span className="scrolllist_label">Mới</span>
-                                </span>
-                            </h2>
+                <div style={{ width: '100%', margin: '0 12px', display: 'flex' }}>
+                    <div style={{ width: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <div style={{ height: '70px', width: '95%', border: '1px solid #80808033', borderRadius: '5px', display: 'flex', alignItems: 'center' }}>
+                            <div style={{ marginLeft: '12px', height: '50px', width: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#DBEEFB', borderRadius: '50%' }}>
+                                <FaRegClock style={{ fontSize: '35px', color: '#0B4469' }} />
+                            </div>
+                            <div style={{ marginLeft: '8px' }}>
+                                <div style={{ color: 'black', fontSize: '14px', fontWeight: 'bold', lineHeight: '24px' }}>Chưa hoàn thành</div>
+                                <div style={{ fontSize: '12px', fontWeight: 'bold', lineHeight: '12px' }}>{coursesInProgress.length} khóa</div>
+                            </div>
                         </div>
                     </div>
-                    <div className="scrolllist_body">
-                        <section className="scrolllist_section">
-                            <section className="scrolllist_item_wrap">
-                                <div className="scrolllist_item_wrapper">
-                                    <a className="scrolllist_item" title="HTML CSS Pro" target="_self" href="/landing/htmlcss/">
-                                        <button className="scrolllist_btn">Xem khóa học</button>
-                                        <img className="scrolllist_item_thumb" src="https://files.fullstack.edu.vn/f8-prod/courses/15/62f13d2424a47.png" alt="HTML CSS Pro" />
-                                    </a>
-                                    <h3 className="scrolllist_title">
-                                        <a target="_self" href="/landing/htmlcss/">HTML CSS Pro</a>
-                                    </h3>
-                                    <div className="price">
-                                        <span className="old_price">2.500.000đ</span>
-                                        <span className="main_price">1.299.000đ</span>
-                                    </div>
-                                </div>
-                            </section>
-                            <section className="scrolllist_item_wrap">
-                                <div className="scrolllist_item_wrapper">
-                                    <a className="scrolllist_item" title="HTML CSS Pro" target="_self" href="/landing/htmlcss/">
-                                        <button className="scrolllist_btn">Xem khóa học</button>
-                                        <img className="scrolllist_item_thumb" src="https://files.fullstack.edu.vn/f8-prod/courses/15/62f13d2424a47.png" alt="HTML CSS Pro" />
-                                    </a>
-                                    <h3 className="scrolllist_title">
-                                        <a target="_self" href="/landing/htmlcss/">HTML CSS Pro</a>
-                                    </h3>
-                                    <div className="price">
-                                        <span className="old_price">2.500.000đ</span>
-                                        <span className="main_price">1.299.000đ</span>
-                                    </div>
-                                </div>
-                            </section>
-                            <section className="scrolllist_item_wrap">
-                                <div className="scrolllist_item_wrapper">
-                                    <a className="scrolllist_item" title="HTML CSS Pro" target="_self" href="/landing/htmlcss/">
-                                        <button className="scrolllist_btn">Xem khóa học</button>
-                                        <img className="scrolllist_item_thumb" src="https://files.fullstack.edu.vn/f8-prod/courses/15/62f13d2424a47.png" alt="HTML CSS Pro" />
-                                    </a>
-                                    <h3 className="scrolllist_title">
-                                        <a target="_self" href="/landing/htmlcss/">HTML CSS Pro</a>
-                                    </h3>
-                                    <div className="price">
-                                        <span className="old_price">2.500.000đ</span>
-                                        <span className="main_price">1.299.000đ</span>
-                                    </div>
-                                </div>
-                            </section>
-
-                            <section className="scrolllist_item_wrap">
-                                <div className="scrolllist_item_wrapper">
-                                    <a className="scrolllist_item" title="HTML CSS Pro" target="_self" href="/landing/htmlcss/">
-                                        <button className="scrolllist_btn">Xem khóa học</button>
-                                        <img className="scrolllist_item_thumb" src="https://files.fullstack.edu.vn/f8-prod/courses/15/62f13d2424a47.png" alt="HTML CSS Pro" />
-                                    </a>
-                                    <h3 className="scrolllist_title">
-                                        <a target="_self" href="/landing/htmlcss/">HTML CSS Pro</a>
-                                    </h3>
-                                    <div className="price">
-                                        <span className="old_price">2.500.000đ</span>
-                                        <span className="main_price">1.299.000đ</span>
-                                    </div>
-                                </div>
-                            </section>
-                            <section className="scrolllist_item_wrap">
-                                <div className="scrolllist_item_wrapper">
-                                    <a className="scrolllist_item" title="HTML CSS Pro" target="_self" href="/landing/htmlcss/">
-                                        <button className="scrolllist_btn">Xem khóa học</button>
-                                        <img className="scrolllist_item_thumb" src="https://files.fullstack.edu.vn/f8-prod/courses/15/62f13d2424a47.png" alt="HTML CSS Pro" />
-                                    </a>
-                                    <h3 className="scrolllist_title">
-                                        <a target="_self" href="/landing/htmlcss/">HTML CSS Pro</a>
-                                    </h3>
-                                    <div className="price">
-                                        <span className="old_price">2.500.000đ</span>
-                                        <span className="main_price">1.299.000đ</span>
-                                    </div>
-                                </div>
-                            </section>
-                            <section className="scrolllist_item_wrap">
-                                <div className="scrolllist_item_wrapper">
-                                    <a className="scrolllist_item" title="HTML CSS Pro" target="_self" href="/landing/htmlcss/">
-                                        <button className="scrolllist_btn">Xem khóa học</button>
-                                        <img className="scrolllist_item_thumb" src="https://files.fullstack.edu.vn/f8-prod/courses/15/62f13d2424a47.png" alt="HTML CSS Pro" />
-                                    </a>
-                                    <h3 className="scrolllist_title">
-                                        <a target="_self" href="/landing/htmlcss/">HTML CSS Pro</a>
-                                    </h3>
-                                    <div className="price">
-                                        <span className="old_price">2.500.000đ</span>
-                                        <span className="main_price">1.299.000đ</span>
-                                    </div>
-                                </div>
-                            </section>
-                            <section className="scrolllist_item_wrap">
-                                <div className="scrolllist_item_wrapper">
-                                    <a className="scrolllist_item" title="HTML CSS Pro" target="_self" href="/landing/htmlcss/">
-                                        <button className="scrolllist_btn">Xem khóa học</button>
-                                        <img className="scrolllist_item_thumb" src="https://files.fullstack.edu.vn/f8-prod/courses/15/62f13d2424a47.png" alt="HTML CSS Pro" />
-                                    </a>
-                                    <h3 className="scrolllist_title">
-                                        <a target="_self" href="/landing/htmlcss/">HTML CSS Pro</a>
-                                    </h3>
-                                    <div className="price">
-                                        <span className="old_price">2.500.000đ</span>
-                                        <span className="main_price">1.299.000đ</span>
-                                    </div>
-                                </div>
-                            </section>
-                            <section className="scrolllist_item_wrap">
-                                <div className="scrolllist_item_wrapper">
-                                    <a className="scrolllist_item" title="HTML CSS Pro" target="_self" href="/landing/htmlcss/">
-                                        <button className="scrolllist_btn">Xem khóa học</button>
-                                        <img className="scrolllist_item_thumb" src="https://files.fullstack.edu.vn/f8-prod/courses/15/62f13d2424a47.png" alt="HTML CSS Pro" />
-                                    </a>
-                                    <h3 className="scrolllist_title">
-                                        <a target="_self" href="/landing/htmlcss/">HTML CSS Pro</a>
-                                    </h3>
-                                    <div className="price">
-                                        <span className="old_price">2.500.000đ</span>
-                                        <span className="main_price">1.299.000đ</span>
-                                    </div>
-                                </div>
-                            </section>
-                        </section>
+                    <div style={{ width: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <div style={{ height: '70px', width: '95%', border: '1px solid #80808033', borderRadius: '5px', display: 'flex', alignItems: 'center' }}>
+                            <div style={{ marginLeft: '12px', height: '50px', width: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#CBF9E0', borderRadius: '50%' }}>
+                                <BsCheck2Circle style={{ fontSize: '35px', color: '#0A5135' }} />
+                            </div>
+                            <div style={{ marginLeft: '8px' }}>
+                                <div style={{ color: 'black', fontSize: '14px', fontWeight: 'bold', lineHeight: '24px' }}>Đã hoàn thành</div>
+                                <div style={{ fontSize: '12px', fontWeight: 'bold', lineHeight: '12px' }}>{completedCourses.length} khóa</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <CourseList courses={[...(completedCourses || []), ...(coursesInProgress || [])]} />
+
             </div>
 
         </section>

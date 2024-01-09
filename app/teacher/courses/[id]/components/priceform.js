@@ -65,7 +65,7 @@ const PriceForm = (params) => {
 
                     {!isSubmit ? <button onClick={handleSaveTitle}>Lưu</button> : <button disabled>Đang lưu...</button>}
 
-                </div> : course.newPrice ? <div>{course.newPrice.toLocaleString('vi-VN')} <strong>VNĐ</strong></div> : <div style={{ fontStyle: 'italic' }}>Miễn phí</div>
+                </div> : course.newPrice ? <div>{course.newPrice.toLocaleString('vi-VN')} <strong>VNĐ</strong></div> : <div style={{ fontStyle: 'italic' }}>Chưa đặt giá</div>
             }
 
         </div>

@@ -237,7 +237,32 @@
                     }
                 }
 
+                button {
+                    background: none;
+                    border: none;
+                    cursor: pointer;
+                    display: inline-block;
+                    float: left;
+                    height: 24px;
+                    padding: 3px 5px;
+                    width: 28px;
 
+                }
+
+                .button-save {
+                    width: 80px;
+                    border: none;
+                    background-color: #111625;
+                    color: white;
+                    height: 38px;
+                    font-weight: bold;
+                    border-radius: 8px;
+                    cursor: pointer;
+
+                    &:hover {
+                        opacity: 0.5;
+                    }
+                }
             }
         }
     }

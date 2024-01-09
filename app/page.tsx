@@ -34,7 +34,6 @@ function Home() {
       <Course></Course>
       <FunFact></FunFact>
       <Blog></Blog>
-      <Testimonial></Testimonial>
       <Callto></Callto>
     </div>
 

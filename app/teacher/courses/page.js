@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useState, useEffect } from "react"
 import { getAllCourse } from "@/services/courseService"
 import ReactPaginate from "react-paginate"
-
+import { IoMdAddCircleOutline } from "react-icons/io";
 const Courses = () => {
     const [listCourse, setListCourse] = useState(null)
     const [currentPage, setCurrentPage] = useState(1)
@@ -37,13 +37,18 @@ const Courses = () => {
 
     return (
         <div className="course-wrapper">
-            <Link href="/teacher/create">
-                <button>Tạo khóa học</button>
+            <Link href="/teacher/create" style={{ textDecoration: 'none' }}>
+                <button style={{
+                    border: 'none', padding: '8px', borderRadius: '5px', marginRight: '4px', fontWeight: 'bold', alignItems: 'center', justifyContent: 'center', display: 'flex',
+                    color: 'white', backgroundColor: '#0268A0'
+                }}>
+                    <IoMdAddCircleOutline style={{ fontSize: '28px' }} />
+                    Tạo khóa học</button>
             </Link>
             <table style={{ marginTop: '10px' }} class="table ">
                 <thead >
                     <tr className="table-secondary" style={{ border: '1px solid #80808033', }}>
-                        <th>Tiêu đề  <i style={{ cursor: 'pointer' }} className="fa-solid fa-sort"></i></th>
+                        <th>Tiêu đề  </th>
                         <th>Giá <i style={{ cursor: 'pointer' }} className="fa-solid fa-sort"></i></th>
                         <th>Trạng thái <i style={{ cursor: 'pointer' }} className="fa-solid fa-sort"></i></th>
                         <th></th>

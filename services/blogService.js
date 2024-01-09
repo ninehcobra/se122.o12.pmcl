@@ -1,8 +1,8 @@
 import axios from '../setup/axios'
 
-const getBlog = async (page, limit) => {
+const getBlog = async (page, limit, name = '') => {
     try {
-        let res = await axios.get(`/api/get-blog?page=${page}&limit=${limit}`)
+        let res = await axios.get(`/api/get-blog?page=${page}&limit=${limit}&name=${name}`)
         checkRes(res.EC)
         return res
     } catch (error) {

@@ -16,10 +16,12 @@ const ChapterDetail = ({ chapter, isPurchase, course, setIsDone }) => {
     const router = useRouter()
 
     const [isPay, setIsPay] = useState(false)
+
     const convertCurrency = (amount) => {
         const fixedRate = 0.000043;
         const amountUSD = amount * fixedRate;
-        return amountUSD.toString()
+        const roundedAmountUSD = amountUSD.toFixed(1);
+        return roundedAmountUSD;
     };
 
     const purchaseCourse = async () => {

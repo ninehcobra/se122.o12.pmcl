@@ -49,8 +49,10 @@ const Sidebar = ({ course, isPurchase, handleRefreshPage }) => {
     const convertCurrency = (amount) => {
         const fixedRate = 0.000043;
         const amountUSD = amount * fixedRate;
-        return amountUSD.toString()
+        const roundedAmountUSD = amountUSD.toFixed(2);
+        return roundedAmountUSD;
     };
+
     const purchaseCourse = async () => {
         let res = await purchase(course.id)
         if (res && res.EC === 0) {
@@ -77,7 +79,7 @@ const Sidebar = ({ course, isPurchase, handleRefreshPage }) => {
                             height="10px"
                             isLabelVisible={false}
                             completed={course.progress} />
-                        <div style={{ margin: ' 8px 0', fontWeight: 'bold', color: '#0183C5' }}>Hoàn thành {course.progress} %</div>
+                        <div style={{ margin: ' 8px 0', fontWeight: 'bold', color: '#0183C5' }}>Hoàn thành {Math.round(course.progress)} %</div>
                     </div> : <div style={{ marginBottom: '24px' }}></div>}
 
                 </div>

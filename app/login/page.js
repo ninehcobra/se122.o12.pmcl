@@ -95,8 +95,8 @@ export default function Login() {
                     await dispatch(loginRedux(data))
                     await localStorage.setItem("jwt", res.DT.access_token)
                     toast('Đăng nhập thành công')
-
-                    router.push('/dashboard')
+                    router.refresh()
+                    // router.push('/dashboard')
                     saveLoginInfo()
                 }
                 else if (res.EC === 3) {

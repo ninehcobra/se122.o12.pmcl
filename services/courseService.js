@@ -154,9 +154,9 @@ const deleteChapter = async (id) => {
     }
 }
 
-const getUserCourse = async (id) => {
+const getUserCourse = async (id, page, limit, search) => {
     try {
-        let res = await axios.post(`/api/get-user-course`, { categoryId: id })
+        let res = await axios.post(`/api/get-user-course`, { categoryId: id, page, limit, search })
         checkRes(res.EC)
         return res
     } catch (error) {
@@ -232,6 +232,32 @@ const markComplete = async (id) => {
     }
 }
 
+const getDashboardCourses = async (id) => {
+    try {
+        let res = await axios.get(`/api/get-dashboard-courses`)
+        checkRes(res.EC)
+        return res
+    } catch (error) {
+        return {
+            EC: -5,
+            EM: 'Can not connect to server'
+        }
+    }
+}
+
+const getAnalytics = async () => {
+    try {
+        let res = await axios.get(`/api/get-analytics`)
+        checkRes(res.EC)
+        return res
+    } catch (error) {
+        return {
+            EC: -5,
+            EM: 'Can not connect to server'
+        }
+    }
+}
+
 export {
     createCourse,
     getCourse,
@@ -249,5 +275,7 @@ export {
     getUserPurchase,
     getChapterDetail,
     purchase,
-    markComplete
+    markComplete,
+    getDashboardCourses,
+    getAnalytics
 }
