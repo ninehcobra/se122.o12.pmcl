@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation'
 import CategoryForm from "./components/categoryform"
 import PriceForm from "./components/priceform"
 import ChapterForm from "./components/chapterform"
+import OverviewForm from "./components/overviewform"
 import Banner from "../../../components/banner"
 import Modal from 'react-modal';
 import { toast } from "react-toastify"
@@ -62,7 +63,8 @@ const Courses = ({ params }) => {
                 data.thumbnail,
                 data.newPrice,
                 data.categoryId,
-                data.Chapters && Array.isArray(data.Chapters) ? data.Chapters.some(chapter => chapter.isPublished) : false
+                data.Chapters && Array.isArray(data.Chapters) ? data.Chapters.some(chapter => chapter.isPublished) : false,
+                data.overview
             ];
 
             const totalFields = requiredFields.length;
@@ -194,6 +196,16 @@ const Courses = ({ params }) => {
                                 </div>
                             </div>
                             <PriceForm course={course} changeCompletionText={changeCompletionText} />
+
+                            <div className="customize-wrapper">
+                                <div className="customize-icon">
+                                    <img src="https://raw.githubusercontent.com/ninehcobra/free-host-image/main/overview.png"></img>
+                                </div>
+                                <div className="customize-title">
+                                    Mục tiêu khóa học
+                                </div>
+                            </div>
+                            <OverviewForm course={course} changeCompletionText={changeCompletionText} />
 
                         </div>
                     </div>

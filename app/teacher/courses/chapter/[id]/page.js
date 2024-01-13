@@ -11,7 +11,7 @@ import VideoForm from "../components/videoform"
 import Banner from "../../../../components/banner"
 import { toast } from "react-toastify"
 import Modal from 'react-modal';
-
+import LessonForm from "../components/lessonform"
 
 const Chapter = ({ params }) => {
     const [chapter, setChapter] = useState()
@@ -173,14 +173,14 @@ const Chapter = ({ params }) => {
                         <div className="right-content">
                             <div className="customize-wrapper">
                                 <div className="customize-icon">
-                                    <img src="https://raw.githubusercontent.com/ninehcobra/free-host-image/main/play-button.png"></img>
+                                    <img src="https://raw.githubusercontent.com/ninehcobra/free-host-image/main/lesson.png"></img>
                                 </div>
                                 <div className="customize-title">
-                                    Thêm Video
+                                    Bài giảng
                                 </div>
                             </div>
-                            <VideoForm chapter={chapter} changeCompletionText={changeCompletionText} />
 
+                            <LessonForm chapter={chapter} changeCompletionText={changeCompletionText} />
                         </div>
                     </div>
                 </div>
