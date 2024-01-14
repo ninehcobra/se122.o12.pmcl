@@ -1,10 +1,9 @@
 'use client'
 
-import { updateCourse } from "@/services/courseService"
-import { useRouter } from "next/navigation"
-import { useState } from "react"
-import { toast } from "react-toastify"
-
+import { updateCourse } from "@/services/courseService";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 const OverviewForm = (params) => {
     let course = params.course;
@@ -12,26 +11,35 @@ const OverviewForm = (params) => {
 
     const [isEditing, setIsEditing] = useState(false);
     const [newTarget, setNewTarget] = useState("");
-    const [overview, setOverview] = useState(course.overview ? JSON.parse(course.overview) : []);
-    const [isSubmit, setIsSubmit] = useState(false);
+    const [overview, setOverview] = useState([]);
 
     const router = useRouter();
+
+    useEffect(() => {
+        try {
+            setOverview(course.overview ? JSON.parse(course.overview) : []);
+
+        } catch (error) {
+            setOverview(course.overview)
+        }
+    }, [course.overview]);
 
     const handleSaveTitle = async () => {
         if (overview.length > 0) {
             course.overview = overview;
             let res = await updateCourse(course);
             if (res && res.EC === 0) {
-                changeCompletionText(course);
+                changeCompletionText(course, true);
                 toast('Lưu thành công');
                 setIsEditing(false);
-                setIsSubmit(false);
-                router.refresh()
+
+                router.refresh();
             }
         } else {
             toast.warning('Vui lòng điền tối thiểu một mục tiêu');
         }
     };
+
 
     const handleAddTarget = () => {
         if (newTarget.trim() !== "") {
@@ -46,7 +54,6 @@ const OverviewForm = (params) => {
         setOverview(updatedOverview);
     };
 
-
     return (
         <div className="title-form">
             <div className="title-form-label">
@@ -57,13 +64,13 @@ const OverviewForm = (params) => {
                         onClick={() => setIsEditing(true)}
                         style={{ display: 'flex', alignItems: 'center' }}
                     >
-                        <i class="fa-solid fa-pencil"></i>
+                        <i className="fa-solid fa-pencil"></i>
                         <div style={{ marginLeft: '12px' }}>Thêm mục tiêu</div>
                     </div>
                 ) : (
                     <div
                         className="edit-btn"
-                        onClick={() => { setIsEditing(false); setOverview(course.overview ? JSON.parse(course.overview) : []) }}
+                        onClick={() => { setIsEditing(false); }}
                         style={{ display: 'flex', alignItems: 'center' }}
                     >
                         <div style={{ marginLeft: '12px' }}>Hủy</div>
@@ -82,36 +89,25 @@ const OverviewForm = (params) => {
                         />
                         <button onClick={handleAddTarget}>Thêm</button>
                     </div>
-                    {
-                        overview.length > 0 ?
-                            (
-                                <ul>
-                                    {overview.map((target, index) => (
-                                        <li key={index}>
-                                            {target}{' '}
-                                            <span onClick={() => handleRemoveTarget(index)}>Xóa</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            ) : ''
-                    }
-                    {!isSubmit ? (
-                        <button onClick={handleSaveTitle}>Lưu</button>
-                    ) : (
-                        <button disabled>Đang lưu...</button>
-                    )}
+                    {overview.length > 0 ? (
+                        <ul>
+                            {overview.map((target, index) => (
+                                <li key={index}>
+                                    {target}{' '}
+                                    <span onClick={() => handleRemoveTarget(index)}>Xóa</span>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : ''}
+                    <button onClick={handleSaveTitle} disabled={overview.length === 0}>Lưu</button>
                 </div>
             ) : (
                 <div>
-                    {course.overview && JSON.parse(course.overview).length > 0 ? (
+                    {overview.length > 0 ? (
                         <ul>
-                            {JSON.parse(course.overview).map(
-                                (item, index) => (
-                                    <li key={index}>
-                                        {item}
-                                    </li>
-                                )
-                            )}
+                            {overview.map((item, index) => (
+                                <li key={index}>{item}</li>
+                            ))}
                         </ul>
                     ) : (
                         <div style={{ fontStyle: 'italic' }}>Chưa có mục tiêu</div>
@@ -122,4 +118,4 @@ const OverviewForm = (params) => {
     );
 };
 
-export default OverviewForm
+export default OverviewForm;

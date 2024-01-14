@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { toast } from "react-toastify"
 import { Grip, Pencil } from "lucide-react";
+import CreateLessonModal from "./createlessonmodal"
 
 const LessonForm = (params) => {
 
@@ -36,6 +37,22 @@ const LessonForm = (params) => {
         }
     }
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleCreateLesson = (lessonData) => {
+        // Gửi dữ liệu lessonData lên server để tạo lesson
+        console.log('Creating lesson:', lessonData);
+        // Đóng modal khi lesson được tạo thành công
+        handleCloseModal();
+    };
 
 
     return (
@@ -46,7 +63,7 @@ const LessonForm = (params) => {
                 </div>
                 {!isEditing
                     ?
-                    <div className="edit-btn" onClick={() => setIsEditing(true)} style={{ display: 'flex', alignItems: 'center' }}>
+                    <div className="edit-btn" onClick={handleOpenModal} style={{ display: 'flex', alignItems: 'center' }}>
                         <i class="fa-solid fa-pencil"></i>
                         <div style={{ marginLeft: '12px' }}>Thêm bài học</div>
                     </div>
@@ -95,7 +112,11 @@ const LessonForm = (params) => {
                     <div></div>
             }
 
-
+            <CreateLessonModal
+                isOpen={isModalOpen}
+                onClose={handleCloseModal}
+                onCreateLesson={handleCreateLesson}
+            />
 
         </div>
     )
