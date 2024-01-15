@@ -40,7 +40,8 @@
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
     "sass": "^1.69.5",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/markdown-it": "^13.0.7",

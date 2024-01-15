@@ -258,6 +258,19 @@ const getAnalytics = async () => {
     }
 }
 
+const createLesson = async (data) => {
+    try {
+        let res = await axios.post(`/api/create-lesson`, data)
+        checkRes(res.EC)
+        return res
+    } catch (error) {
+        return {
+            EC: -5,
+            EM: 'Can not connect to server'
+        }
+    }
+}
+
 export {
     createCourse,
     getCourse,
@@ -277,5 +290,6 @@ export {
     purchase,
     markComplete,
     getDashboardCourses,
-    getAnalytics
+    getAnalytics,
+    createLesson
 }

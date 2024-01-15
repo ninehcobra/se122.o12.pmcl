@@ -2,10 +2,11 @@
 
 import { updateChapter } from "@/services/courseService"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
-import { Grip, Pencil } from "lucide-react";
+import { Grip, Pencil, Trash2 } from "lucide-react";
 import CreateLessonModal from "./createlessonmodal"
+import { createLesson } from "@/services/courseService"
 
 const LessonForm = (params) => {
 
@@ -47,13 +48,61 @@ const LessonForm = (params) => {
         setIsModalOpen(false);
     };
 
-    const handleCreateLesson = (lessonData) => {
+    const handleCreateLesson = async (lessonData) => {
         // Gửi dữ liệu lessonData lên server để tạo lesson
-        console.log('Creating lesson:', lessonData);
-        // Đóng modal khi lesson được tạo thành công
-        handleCloseModal();
+        if (lessonData && lessonData.lessonType === 'video') {
+            let res = await createLesson({
+                title: lessonData.title,
+                duration: lessonData.duration,
+                ChapterId: chapter.id,
+                lessonType: lessonData.lessonType,
+                detail: lessonData.videoUrl
+            })
+            if (res && res.EC === 0) {
+                changeCompletionText(chapter, true)
+                toast('Lưu thành công')
+                router.refresh()
+                handleCloseModal();
+            }
+        }
+        else if (lessonData && lessonData.lessonType === 'reading') {
+            let res = await createLesson({
+                title: lessonData.title,
+                duration: lessonData.duration,
+                ChapterId: chapter.id,
+                lessonType: lessonData.lessonType,
+                detail: lessonData.content
+            })
+            if (res && res.EC === 0) {
+                changeCompletionText(chapter, true)
+                toast('Lưu thành công')
+                router.refresh()
+                handleCloseModal();
+            }
+        }
+        else if (lessonData && lessonData.lessonType === 'quiz') {
+            let res = await createLesson({
+                title: lessonData.title,
+                duration: lessonData.duration,
+                ChapterId: chapter.id,
+                lessonType: lessonData.lessonType,
+                detail: {
+                    duration: lessonData.duration,
+                    questions: lessonData.questions
+                }
+            })
+            if (res && res.EC === 0) {
+                changeCompletionText(chapter, true)
+                toast('Lưu thành công')
+                router.refresh()
+                handleCloseModal();
+            }
+        }
+
+
     };
 
+    useEffect(() => { }, [])
 
     return (
         <div className="title-form">
@@ -84,13 +133,13 @@ const LessonForm = (params) => {
 
                 </div> : chapter.Lessons && chapter.Lessons.length > 0
                     ?
-                    <div style={{ maxHeight: '450px', overflowY: 'auto', }}>
+                    <div style={{ maxHeight: '450px', overflowY: 'auto', marginTop: '12px' }}>
                         {
                             chapter.Lessons.map((lesson) => {
                                 return (
                                     <div style={{
                                         height: '47px', padding: '10px', marginLeft: '10px', display: 'flex', alignItems: 'center', backgroundColor: 'rgb(222, 227, 237)',
-                                        marginBottom: '16px', justifyContent: 'space-between'
+                                        marginBottom: '16px', justifyContent: 'space-between', borderRadius: '5px'
                                     }}>
                                         <div style={{ display: 'flex', alignItems: 'center' }}>
                                             <img
@@ -99,8 +148,10 @@ const LessonForm = (params) => {
                                             <div>{lesson.title}</div>
                                         </div>
 
-                                        <div onClick={() => { }} style={{ cursor: 'pointer' }}>
+                                        <div onClick={() => { }} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
+                                            <Trash2 style={{ marginRight: '12px', color: 'red' }} />
                                             <Pencil style={{ marginRight: '4px' }} />
+
                                         </div>
 
                                     </div>

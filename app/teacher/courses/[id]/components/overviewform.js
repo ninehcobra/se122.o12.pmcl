@@ -27,6 +27,7 @@ const OverviewForm = (params) => {
     const handleSaveTitle = async () => {
         if (overview.length > 0) {
             course.overview = overview;
+            course.updateOverview = true
             let res = await updateCourse(course);
             if (res && res.EC === 0) {
                 changeCompletionText(course, true);

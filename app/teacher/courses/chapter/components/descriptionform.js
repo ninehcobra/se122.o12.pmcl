@@ -57,7 +57,7 @@ const DescriptionForm = (params) => {
 
             {isEditing ?
                 <div className="title-form-wrapper">
-                    <ReactQuill style={{ marginBottom: '12px', backgroundColor: 'white' }} theme="snow" value={description} onChange={setDescription} />
+                    <ReactQuill style={{ marginBottom: '12px', backgroundColor: 'white', color: 'black' }} theme="snow" value={description} onChange={setDescription} />
 
                     {!isSubmit ? <button className='button-save' onClick={handleSaveDescription}>Lưu</button> : <button className='button-save' disabled>Đang lưu...</button>}
 

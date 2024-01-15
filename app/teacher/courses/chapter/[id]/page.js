@@ -55,7 +55,7 @@ const Chapter = ({ params }) => {
             const requiredFields = [
                 data.title,
                 data.description,
-                data.videoUrl,
+                data.Lessons && Array.isArray(data.Lessons) ? data.Lessons.length > 0 : false,
             ];
 
             const totalFields = requiredFields.length;
@@ -84,7 +84,7 @@ const Chapter = ({ params }) => {
 
     const onChangeIsPublished = async () => {
 
-        if (chapter && chapter.title && chapter.description && chapter.videoUrl) {
+        if (chapter && chapter.title && chapter.description && chapter.Lessons.length > 0) {
             chapter.isPublished = !chapter.isPublished
             let res = await updateChapter(chapter)
             if (res && res.EC === 0) {
