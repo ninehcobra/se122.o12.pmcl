@@ -8,8 +8,8 @@ const Blog = () => {
                 <div className="row">
                     <div className="col-lg-7 col-md-9 m-auto text-center">
                         <div className="sec-heading">
-                            <span className="tagline">What’s new</span>
-                            <h3 className="sec-title">Every Single Update From <br />Our Blog Page</h3>
+                            <span className="tagline">Tin tức</span>
+                            <h3 className="sec-title">Mọi cập nhật từ <br />trang blog của chúng tôi</h3>
                         </div>
                     </div>
                 </div>

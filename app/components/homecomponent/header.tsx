@@ -20,17 +20,7 @@ const Header = () => {
                     <ul className="navbar-nav">
                         <li className="has-menu-child">
                             <Link href="">TRANG CHỦ</Link>
-                            <ul className="sub-menu">
-                                <li>
-                                    <Link href={""}>Home 1</Link>
-                                </li>
-                                <li>
-                                    <Link href={""}>Home 1</Link>
-                                </li>
-                                <li>
-                                    <Link href={""}>Home 1</Link>
-                                </li>
-                            </ul>
+
                             <i className="menu-dropdown fa-solid fa-chevron-down"></i>
                         </li>
                         <li className="has-menu-child">
