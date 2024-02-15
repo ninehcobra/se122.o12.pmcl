@@ -1,6 +1,7 @@
 
 # Online learning website - Nineh Learning
 
+This project was created to serve Project 2 (SE122.012.PMCL), under the guidance of lecturer: Ths. Tran Anh Dung of UIT - HCMC
 Nineh Learning is a multitasking online learning platform that provides flexible and quality learning experiences for learners of all ages and levels. The project focuses on connecting teachers and students through diverse courses, educational resources and innovative technology.
 
 
